@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(myproject)
 
+# build as HTML instead of JS
 SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 
 # Find includes in corresponding build directories
@@ -32,6 +33,7 @@ add_executable(helloworld ${SOURCE} ${qml_QRC})
 # Use the Qml/Quick modules from Qt 5.
 target_link_libraries(helloworld Qt5::Qml Qt5::Quick)
 
-#add_link_options(--bind) # since 3.13
-#target_link_options(helloworld --bind) # since 3.13
+# Add "--bind" linker flag
+#add_link_options(--bind)               # require CMake 3.13
+#target_link_options(helloworld --bind) # require CMake 3.13
 set_target_properties(helloworld PROPERTIES LINK_FLAGS --bind)
