@@ -19,12 +19,12 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5 REQUIRED Qml Quick Gui)
 
 # add the qml.qrc file
-qt5_add_resources(qml_QRC src/qml.qrc)
+qt5_add_resources(qml_QRC qml.qrc)
 
 # add source files
 set(SOURCE 
 	${SOURCE}
-	src/main.cpp
+	main.cpp
 )
 
 # Tell CMake to create the helloworld executable
