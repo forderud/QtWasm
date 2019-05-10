@@ -1,16 +1,9 @@
-#
-# For basic cmake file structure see: http://doc.qt.io/qt-5/cmake-manual.html
-#
 cmake_minimum_required(VERSION 3.12)
-
 
 project(myproject)
 
 # build as HTML instead of JS
 SET(CMAKE_EXECUTABLE_SUFFIX ".html")
-
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
