@@ -1,3 +1,5 @@
+cd cmake
+
 :: Build container
 docker build --tag=forderud/wasmbuilder:cmake .
 

@@ -1,3 +1,5 @@
+cd qmake
+
 :: Build container
 docker build --tag=forderud/wasmbuilder:qmake .
 
