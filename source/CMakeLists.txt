@@ -23,15 +23,15 @@ qt5_add_resources(qml_QRC qml.qrc)
 
 # add source files
 set(SOURCE 
-	${SOURCE}
-	main.cpp
+    ${SOURCE}
+    main.cpp
 )
 
 # Tell CMake to create the helloworld executable
 add_executable(helloworld ${SOURCE} ${qml_QRC})
 
 # Use the Qml/Quick modules from Qt 5.
-target_link_libraries(helloworld Qt5::Qml Qt5::Quick)
+target_link_libraries(helloworld PRIVATE Qt5::Qml Qt5::Quick)
 
 # Add "--bind" linker flag
 #add_link_options(--bind)               # require CMake 3.13
