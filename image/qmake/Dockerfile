@@ -6,7 +6,7 @@ WORKDIR /development
 # install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
 # Copy the current directory contents into the container
-COPY ../GE_External_Root_CA_2_1.crt /development
+COPY GE_External_Root_CA_2_1.crt /development
 RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
@@ -28,7 +28,7 @@ FROM trzeci/emscripten
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
 # Copy the current directory contents into the container
 WORKDIR /development
-COPY ../GE_External_Root_CA_2_1.crt /development
+COPY GE_External_Root_CA_2_1.crt /development
 RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
