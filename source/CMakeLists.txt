@@ -37,9 +37,10 @@ target_link_libraries(helloworld PRIVATE Qt5::Qml Qt5::Quick)
 #add_link_options(--bind)               # require CMake 3.13
 #target_link_options(helloworld --bind) # require CMake 3.13
 
-add_definitions("-s ALLOW_MEMORY_GROWTH=1")
+set(WASM_FLAGS "-s WASM=1 -s FULL_ES2=1 -s USE_WEBGL2=1 -s NO_EXIT_RUNTIME=0 -s ERROR_ON_UNDEFINED_SYMBOLS=1 -s ALLOW_MEMORY_GROWTH=1 -s \"BINARYEN_TRAP_MODE='clamp'\"")
+add_definitions(${WASM_FLAGS})
 
-set_target_properties(helloworld PROPERTIES LINK_FLAGS "-s WASM=1 -s FULL_ES2=1 -s USE_WEBGL2=1 -s NO_EXIT_RUNTIME=0 -s ERROR_ON_UNDEFINED_SYMBOLS=1 --bind -s \"BINARYEN_TRAP_MODE='clamp'\" -O3 -s ALLOW_MEMORY_GROWTH=1")
+set_target_properties(helloworld PROPERTIES LINK_FLAGS "--bind ${WASM_FLAGS}")
 
 # Link to missing Qt libraries (the order does matter)
 target_link_libraries(helloworld PRIVATE
