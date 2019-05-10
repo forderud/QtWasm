@@ -4,8 +4,7 @@
 TEMPLATE = app
 TARGET   = helloworld
 
-QT += qml quick
+QT += quick qml
 
-SOURCES = main.cpp
-
+SOURCES   += main.cpp
 RESOURCES += qml.qrc
