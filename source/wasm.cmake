@@ -8,5 +8,6 @@ set(WASM_FLAGS "-s USE_WEBGL2=1 -s FULL_ES2=1 -s FULL_ES3=1 -s EXIT_RUNTIME=1 -s
 
 add_definitions(${WASM_FLAGS})
 
-#add_link_options(--bind ${WASM_FLAGS})
-#target_link_options(helloworld --bind ${WASM_FLAGS})
+add_link_options(--bind)
+#add_link_options(${WASM_FLAGS})
+#target_link_options(helloworld PRIVATE ${WASM_FLAGS})
