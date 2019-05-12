@@ -40,4 +40,4 @@ ENV PATH="/usr/local/Qt-5.13.0/bin:${PATH}"
 WORKDIR /project/build
 
 # build CMake project (doesn't work yet)
-CMD cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.13.0 -DQt5_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5 -DQt5Qml_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Qml -DQt5Network_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Network -DQt5Core_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Core  -DQt5Quick_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Quick -DQt5Gui_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Gui /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.13.0 -DQt5_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5 -DQt5Qml_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Qml -DQt5Network_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Network -DQt5Core_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Core  -DQt5Quick_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Quick -DQt5Gui_DIR=/usr/local/Qt-5.13.0/lib/cmake/Qt5Gui /project/source && make
