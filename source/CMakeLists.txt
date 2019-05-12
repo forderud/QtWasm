@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.13)
 
 project(myproject)
 
@@ -27,8 +27,8 @@ add_executable(helloworld ${SOURCE} ${qml_QRC})
 target_link_libraries(helloworld PRIVATE Qt5::Qml Qt5::Quick)
 
 # Add WebAssembly compile & linker flags:
-#add_link_options(--bind)               # require CMake 3.13
-#target_link_options(helloworld --bind) # require CMake 3.13
+#add_link_options(--bind)
+#target_link_options(helloworld --bind)
 # USE_WEBGL2:          https://emscripten.org/docs/porting/multimedia_and_graphics/OpenGL-support.html#webgl-friendly-subset-of-opengl-es-2-0-3-0
 # FULL_ES2/3:          Emulate missing WebGL features (https://emscripten.org/docs/porting/multimedia_and_graphics/OpenGL-support.html#opengl-es-2-0-3-0-emulation)
 # ALLOW_MEMORY_GROWTH: https://emscripten.org/docs/optimizing/Optimizing-Code.html#memory-growth
