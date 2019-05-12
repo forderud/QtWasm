@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.13)
+
+# debugging aid
+message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
+message("EMSCRIPTEN: ${EMSCRIPTEN}")
+
 include(wasm.cmake)
 
 project(myproject)
