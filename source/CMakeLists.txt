@@ -28,6 +28,7 @@ add_executable(helloworld ${SOURCE} ${qml_QRC})
 target_link_libraries(helloworld PRIVATE Qt5::Qml Qt5::Quick)
 
 set_target_properties(helloworld PROPERTIES LINK_FLAGS "${WASM_FLAGS}")
+#target_link_options(helloworld PRIVATE ${WASM_FLAGS})
 
 # Link to missing Qt libraries (the order does matter)
 target_link_libraries(helloworld PRIVATE

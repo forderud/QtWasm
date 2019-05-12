@@ -10,4 +10,4 @@ add_definitions(${WASM_FLAGS})
 
 add_link_options(--bind)
 #add_link_options(${WASM_FLAGS})
-#target_link_options(helloworld PRIVATE ${WASM_FLAGS})
+
