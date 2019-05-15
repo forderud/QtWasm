@@ -1,1 +1,1 @@
-docker run --rm  -it forderud/wasmbuilder:cmake sh
+docker run --rm  -it forderud/wasmbuilder:build_wasm sh
