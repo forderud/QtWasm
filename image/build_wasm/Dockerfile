@@ -36,6 +36,12 @@ RUN update-ca-certificates
 COPY --from=qtbuilder /usr/local/Qt-5.13.0/ /usr/local/Qt-5.13.0/
 ENV PATH="/usr/local/Qt-5.13.0/bin:${PATH}"
 
+# Install Boost & Eigen
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+RUN apt-get update && apt-get -y install \
+    libeigen3-dev \
+    libboost-dev
+
 # Build custom sources
 WORKDIR /project/build
 
