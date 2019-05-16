@@ -45,5 +45,5 @@ RUN apt-get update && apt-get -y install \
 # Build custom sources
 WORKDIR /project/build
 
-# build CMake project (doesn't work yet)
+# Run build script
 CMD unix/build_wasm.sh Release
