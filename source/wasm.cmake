@@ -25,3 +25,6 @@ add_link_options("SHELL:-s ALLOW_MEMORY_GROWTH=1")
 # Prevent overflow from trapping
 # https://emscripten.org/docs/compiling/WebAssembly.html#trap-mode
 add_link_options("SHELL:-s \"BINARYEN_TRAP_MODE='clamp'\"")
+
+# Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
+list(APPEND CMAKE_FIND_ROOT_PATH "/")
