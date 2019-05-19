@@ -41,6 +41,10 @@ ENV PATH="/usr/local/Qt-5.13.0/bin:${PATH}"
 RUN apt-get update && apt-get -y install \
     libeigen3-dev \
     libboost-dev
+# Make symlinks to avoid adding /usr/include to include dirs.
+RUN mkdir /project && mkdir /project/dependencies && \
+    ln -s /usr/include/boost  /project/dependencies/boost && \
+    ln -s /usr/include/eigen3 /project/dependencies/eigen3
 
 # Build custom sources
 WORKDIR /project/build
