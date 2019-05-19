@@ -44,9 +44,9 @@ RUN apt-get update && apt-get -y install \
     libeigen3-dev && \
     apt-get -t stretch-backports -y install libboost1.67-dev   # https://packages.debian.org/stretch/libboost-dev
 # Make symlinks to avoid adding /usr/include to include dirs.
-RUN mkdir /project && mkdir /project/dependencies && \
-    ln -s /usr/include/boost  /project/dependencies/boost && \
-    ln -s /usr/include/eigen3 /project/dependencies/eigen3
+RUN mkdir -p /project/dependencies/include && \
+    ln -s /usr/include/boost  /project/dependencies/include/boost && \
+    ln -s /usr/include/eigen3 /project/dependencies/include/eigen3
 
 # Build custom sources
 WORKDIR /project/build
