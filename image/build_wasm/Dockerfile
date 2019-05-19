@@ -38,9 +38,11 @@ ENV PATH="/usr/local/Qt-5.13.0/bin:${PATH}"
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+# Activate backports to get more recent version of Boost
+RUN echo "deb http://deb.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
 RUN apt-get update && apt-get -y install \
-    libeigen3-dev \
-    libboost-dev
+    libeigen3-dev && \
+    apt-get -t stretch-backports -y install libboost1.67-dev   # https://packages.debian.org/stretch/libboost-dev
 # Make symlinks to avoid adding /usr/include to include dirs.
 RUN mkdir /project && mkdir /project/dependencies && \
     ln -s /usr/include/boost  /project/dependencies/boost && \
