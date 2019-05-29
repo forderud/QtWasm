@@ -53,5 +53,5 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
 # Build custom sources
 WORKDIR /project/build
 
-# Run build script
+# Default build command
 CMD unix/build_wasm.sh Release
