@@ -14,6 +14,11 @@ RUN update-ca-certificates
 RUN git clone --branch=5.13.0 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
+
+# Apply custom patch(es)
+COPY ca9daff.diff /development/qt5
+RUN git apply --directory=qtbase ca9daff.diff
+
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
