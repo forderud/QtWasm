@@ -16,8 +16,9 @@ WORKDIR /development/qt5
 RUN ./init-repository
 
 # Apply custom patch(es)
-COPY ca9daff.diff /development/qt5
+COPY *.diff /development/qt5/
 RUN git apply --directory=qtbase ca9daff.diff
+RUN git apply --directory=qtbase 8b682ce.diff
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
