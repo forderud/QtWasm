@@ -31,7 +31,25 @@ add_link_options("SHELL:-s \"BINARYEN_TRAP_MODE='clamp'\"")
 add_link_options("SHELL:-s DISABLE_EXCEPTION_CATCHING=0")
 
 # Generate HTML file for each executable
-SET(CMAKE_EXECUTABLE_SUFFIX ".html")
+#SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
 list(APPEND CMAKE_FIND_ROOT_PATH "/")
+
+# Link to missing Qt libraries.
+# Temporary solution until Qt ship with proper CMake support for WebAssembly.
+function(link_qt_static target)
+    target_link_libraries(${target} PRIVATE
+    "${_qt5Core_install_prefix}/plugins/platforms/libqwasm.a"       # QWasmIntegrationPlugin
+    "${_qt5Core_install_prefix}/lib/libQt5EventDispatcherSupport.a"
+    "${_qt5Core_install_prefix}/lib/libQt5FontDatabaseSupport.a"
+    "${_qt5Core_install_prefix}/lib/libqtfreetype.a"
+    )
+    
+    # copy in Qt HTML/JS launch files
+    set(APPNAME ${target})
+    configure_file("${_qt5Core_install_prefix}/plugins/platforms/wasm_shell.html"
+                   "${target}.html")
+    configure_file("${_qt5Core_install_prefix}/plugins/platforms/qtloader.js"
+                   qtloader.js COPYONLY)
+endfunction()

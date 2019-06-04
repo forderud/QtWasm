@@ -28,12 +28,10 @@ add_executable(helloworld ${SOURCE} ${qml_QRC})
 target_link_libraries(helloworld PRIVATE Qt5::Qml Qt5::Quick)
 
 if(EMSCRIPTEN)
+  link_qt_static(helloworld)
+  
   # Link to missing Qt libraries (the order does matter)
   target_link_libraries(helloworld PRIVATE
-    "${_qt5Core_install_prefix}/plugins/platforms/libqwasm.a"           # QWasmIntegrationPlugin
-    "${_qt5Core_install_prefix}/lib/libQt5EventDispatcherSupport.a"
-    "${_qt5Core_install_prefix}/lib/libQt5FontDatabaseSupport.a"
-    "${_qt5Core_install_prefix}/lib/libqtfreetype.a"
     "${_qt5Core_install_prefix}/qml/QtQuick.2/libqtquick2plugin.a"      # QtQuick2Plugin
     "${_qt5Core_install_prefix}/qml/QtQuick/Window.2/libwindowplugin.a" # QtQuick2WindowPlugin
     "${_qt5Core_install_prefix}/lib/libQt5Quick.a"
