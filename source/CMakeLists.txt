@@ -6,9 +6,6 @@ if(EMSCRIPTEN)
   include(wasm.cmake)
 endif()
 
-# build as HTML instead of JS
-SET(CMAKE_EXECUTABLE_SUFFIX ".html")
-
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 

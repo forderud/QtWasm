@@ -26,5 +26,12 @@ add_link_options("SHELL:-s ALLOW_MEMORY_GROWTH=1")
 # https://emscripten.org/docs/compiling/WebAssembly.html#trap-mode
 add_link_options("SHELL:-s \"BINARYEN_TRAP_MODE='clamp'\"")
 
+# Enable C++ exception catching
+# https://emscripten.org/docs/optimizing/Optimizing-Code.html#c-exceptions
+add_link_options("SHELL:-s DISABLE_EXCEPTION_CATCHING=0")
+
+# Generate HTML file for each executable
+SET(CMAKE_EXECUTABLE_SUFFIX ".html")
+
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
 list(APPEND CMAKE_FIND_ROOT_PATH "/")
