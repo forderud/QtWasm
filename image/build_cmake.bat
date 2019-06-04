@@ -1,7 +1,5 @@
-cd cmake
-
 :: Build container
-docker build --tag=forderud/wasmbuilder:cmake .
+docker build --file cmake\Dockerfile --tag=forderud/wasmbuilder:cmake .
 
 :: Push to dockerhub
 docker tag forderud/wasmbuilder:cmake forderud/wasmbuilder:cmake

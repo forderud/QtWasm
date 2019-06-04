@@ -1,7 +1,5 @@
-cd qmake
-
 :: Build container
-docker build --tag=forderud/wasmbuilder:qmake .
+docker build --file qmake\Dockerfile --tag=forderud/wasmbuilder:qmake .
 
 :: Push to dockerhub
 docker tag forderud/wasmbuilder:qmake forderud/wasmbuilder:qmake
