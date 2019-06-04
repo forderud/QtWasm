@@ -12,11 +12,6 @@ SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-# Temporary work-around until https://codereview.qt-project.org/c/qt/qtbase/+/262935 is merged
-if (NOT CMAKE_CXX_STANDARD_LIBRARIES)
-  set(CMAKE_CXX_STANDARD_LIBRARIES  " ")
-endif()
-
 # Find the Qt libraries for Qt Quick/QML
 find_package(Qt5 REQUIRED Qml Quick Gui)
 
