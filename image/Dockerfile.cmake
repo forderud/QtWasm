@@ -59,5 +59,5 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
 # Build custom sources
 WORKDIR /project/build
 
-# build CMake project
+# Default build command
 CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.13.0 /project/source && make
