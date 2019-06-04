@@ -14,6 +14,12 @@ RUN update-ca-certificates
 RUN git clone --branch=5.13.0 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
+
+# Apply custom patch(es)
+COPY *.diff /development/qt5/
+RUN git apply --directory=qtbase ca9daff.diff
+RUN git apply --directory=qtbase 8b682ce.diff
+
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
@@ -35,6 +41,20 @@ RUN update-ca-certificates
 # Copy Qt binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-5.13.0/ /usr/local/Qt-5.13.0/
 ENV PATH="/usr/local/Qt-5.13.0/bin:${PATH}"
+
+# Install Boost & Eigen
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+# Activate backports to get more recent version of Boost
+RUN echo "deb http://deb.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
+RUN apt-get update && apt-get -y install \
+    libeigen3-dev && \
+    apt-get -t stretch-backports -y install libboost1.67-dev   # https://packages.debian.org/stretch/libboost-dev
+# Make symlinks to avoid adding /usr/include to include dirs.
+RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib && \
+    ln -s /usr/include/boost   /project/dependencies/include/boost  && \
+    ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
+    ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
+    ln -s /usr/local/Qt-5.13.0 /project/Qt
 
 # Build custom sources
 WORKDIR /project/build
