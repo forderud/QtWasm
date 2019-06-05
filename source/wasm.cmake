@@ -52,4 +52,6 @@ function(link_qt_static target)
                    "${target}.html")
     configure_file("${_qt5Core_install_prefix}/plugins/platforms/qtloader.js"
                    qtloader.js COPYONLY)
+    configure_file("${_qt5Core_install_prefix}/plugins/platforms/qtlogo.svg"
+                   qtlogo.svg COPYONLY)
 endfunction()
