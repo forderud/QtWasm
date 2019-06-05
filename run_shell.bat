@@ -1,1 +1,1 @@
-docker run --rm -it forderud/wasmbuilder sh
+docker run --rm -it forderud/qtwasm sh
