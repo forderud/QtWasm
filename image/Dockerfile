@@ -17,10 +17,8 @@ RUN ./init-repository
 
 # Apply custom patch(es)
 COPY *.diff /development/qt5/
-RUN git apply --directory=qtbase 2a2f042.diff # merged 5.13
 RUN git apply --directory=qtbase ca9daff.diff # submitted 5.13
 RUN git apply --directory=qtbase 8b682ce.diff # merged 5.13.0
-RUN git apply --directory=qtbase 9fc17c1.diff # merged 5.13
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
