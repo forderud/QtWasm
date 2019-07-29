@@ -38,8 +38,8 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
-COPY --from=qtbuilder /usr/local/Qt-5.13.0/ /usr/local/Qt-5.13.0/
-ENV PATH="/usr/local/Qt-5.13.0/bin:${PATH}"
+COPY --from=qtbuilder /usr/local/Qt-5.13.1/ /usr/local/Qt-5.13.1/
+ENV PATH="/usr/local/Qt-5.13.1/bin:${PATH}"
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -53,10 +53,10 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.13.0 /project/Qt
+    ln -s /usr/local/Qt-5.13.1 /project/Qt
 
 # Build custom sources
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.13.0 /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.13.1 /project/source && make
