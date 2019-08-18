@@ -22,10 +22,6 @@ add_link_options("SHELL:-s EXIT_RUNTIME=1")
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html#memory-growth
 add_link_options("SHELL:-s ALLOW_MEMORY_GROWTH=1")
 
-# Prevent overflow from trapping
-# https://emscripten.org/docs/compiling/WebAssembly.html#trap-mode
-add_link_options("SHELL:-s \"BINARYEN_TRAP_MODE='clamp'\"")
-
 # Enable C++ exception catching
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html#c-exceptions
 add_link_options("SHELL:-s DISABLE_EXCEPTION_CATCHING=0")
