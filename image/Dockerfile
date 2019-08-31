@@ -39,7 +39,6 @@ RUN update-ca-certificates
 
 # Copy Qt binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-5.13.1/ /usr/local/Qt-5.13.1/
-ENV PATH="/usr/local/Qt-5.13.1/bin:${PATH}"
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -54,6 +53,9 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
     ln -s /usr/local/Qt-5.13.1 /project/Qt
+
+# Add qmake to PATH
+ENV PATH="/usr/local/Qt-5.13.1/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
