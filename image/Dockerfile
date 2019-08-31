@@ -54,8 +54,8 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
     ln -s /usr/local/Qt-5.13.1 /project/Qt
 
-# Add qmake to PATH
-ENV PATH="/usr/local/Qt-5.13.1/bin:${PATH}"
+# Add qmake to PATH (doesn't seem to work)
+#ENV PATH="/usr/local/Qt-5.13.1/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
