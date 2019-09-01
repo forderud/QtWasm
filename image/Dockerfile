@@ -1,4 +1,5 @@
-FROM trzeci/emscripten AS qtbuilder
+# Based on https://hub.docker.com/r/trzeci/emscripten
+FROM trzeci/emscripten:sdk-tag-1.38.32-64bit AS qtbuilder
 
 RUN mkdir -p /development
 WORKDIR /development
@@ -27,7 +28,7 @@ RUN make -j `grep -c '^processor' /proc/cpuinfo`
 RUN make install
 
 
-FROM trzeci/emscripten
+FROM trzeci/emscripten:sdk-tag-1.38.32-64bit
 
 # install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
@@ -52,7 +53,8 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.13.1 /project/Qt
+    ln -s /usr/local/Qt-5.13.1 /project/Qt                          && \
+    ln -s /emsdk_portable      /emsdk_portable/emscripten                 # TODO: Remove after next Emscripten upgrade
 
 # Add qmake to PATH (doesn't seem to work)
 #ENV PATH="/usr/local/Qt-5.13.1/bin:${PATH}"
