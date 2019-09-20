@@ -1,5 +1,5 @@
 # Based on https://hub.docker.com/r/trzeci/emscripten-upstream
-FROM trzeci/emscripten-upstream:sdk-tag-1.38.43-64bit AS qtbuilder
+FROM trzeci/emscripten-upstream:sdk-tag-1.38.45-64bit AS qtbuilder
 
 RUN mkdir -p /development
 WORKDIR /development
@@ -28,7 +28,7 @@ RUN make -j `grep -c '^processor' /proc/cpuinfo`
 RUN make install
 
 
-FROM trzeci/emscripten-upstream:sdk-tag-1.38.43-64bit
+FROM trzeci/emscripten-upstream:sdk-tag-1.38.45-64bit
 
 # install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
