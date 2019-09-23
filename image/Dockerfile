@@ -12,19 +12,12 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Clone Qt sources
-RUN git clone --branch=5.13 https://code.qt.io/qt/qt5.git
+RUN git clone --branch=5.14 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
 
 # Apply custom patch(es)
 COPY *.diff /development/qt5/
-
-# 5.14 patches
-RUN git apply --directory=qtbase ca9daff.diff # merged to 5.14
-RUN git apply --directory=qtbase 31482e1.diff # merged to 5.14 renderbufferStorageMultisample https://codereview.qt-project.org/c/qt/qtbase/+/282464
-RUN git apply --directory=qtbase textureswizzle.diff # merged to 5.14 TextureSwizzle https://codereview.qt-project.org/c/qt/qtbase/+/282921
-#RUN git apply --directory=qtbase 39c47a5.diff # merged to 5.14 glRenderbufferStorageMultisample https://codereview.qt-project.org/c/qt/qtbase/+/282501
-#RUN git apply --directory=qtbase 78761d5.diff # merged to 5.14 Fix clamp mode https://codereview.qt-project.org/c/qt/qtbase/+/283458
 
 # 5.15 patches
 RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
@@ -50,7 +43,7 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
-COPY --from=qtbuilder /usr/local/Qt-5.13.2/ /usr/local/Qt-5.13.2/
+COPY --from=qtbuilder /usr/local/Qt-5.14.1/ /usr/local/Qt-5.14.1/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -64,14 +57,14 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.13.2 /project/Qt                          && \
+    ln -s /usr/local/Qt-5.14.1 /project/Qt                          && \
     ln -s /emsdk_portable      /emsdk_portable/emscripten                 # TODO: Remove after next Emscripten upgrade
 
 # Add qmake to PATH (doesn't seem to work)
-#ENV PATH="/usr/local/Qt-5.13.2/bin:${PATH}"
+#ENV PATH="/usr/local/Qt-5.14.1/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.13.2 /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.14.1 /project/source && make
