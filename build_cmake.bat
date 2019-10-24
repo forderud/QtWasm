@@ -10,7 +10,7 @@ mkdir build
 
 :: Valid choices are "Debug", "RelWithDebInfo", "Release" (also default)
 set BUILD_TYPE=%1
-set DOCKER_IMAGE=forderud/qtwasm:latest
+set DOCKER_IMAGE=forderud/qtwasm:debug
 set MOUNT_SOURCE=-v %cd%\sample:/project/source
 set MOUNT_BUILD=-v %cd%\build:/project/build
 

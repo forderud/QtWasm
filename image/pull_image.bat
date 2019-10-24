@@ -1,2 +1,2 @@
 :: Pull from dockerhub
-docker pull forderud/qtwasm:latest
+docker pull forderud/qtwasm:debug
