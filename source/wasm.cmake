@@ -14,6 +14,10 @@ add_link_options("SHELL:-s USE_WEBGL2=1")
 #add_link_options("SHELL:-s FULL_ES2=1")
 #add_link_options("SHELL:-s FULL_ES3=1")
 
+# Enable demangling of C++ stack traces
+# https://emscripten.org/docs/porting/Debugging.html
+add_link_options("SHELL:-s DEMANGLE_SUPPORT=1")
+
 # Run static dtors at teardown
 # https://emscripten.org/docs/getting_started/FAQ.html#what-does-exiting-the-runtime-mean-why-don-t-atexit-s-run
 add_link_options("SHELL:-s EXIT_RUNTIME=1")
