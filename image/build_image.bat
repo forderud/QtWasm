@@ -1,7 +1,7 @@
 :: Build container
-docker build --file Dockerfile --tag=forderud/qtwasm .
+docker build --file Dockerfile --tag=forderud/qtwasm:latest .
 
-:: Push to dockerhub (to "latest" tag)
-docker push forderud/qtwasm
+:: Push to dockerhub
+docker push forderud/qtwasm:latest
 
 pause
