@@ -11,7 +11,7 @@ add_link_options("SHELL:-s USE_WEBGL2=1")
 
 # Emulate missing OpenGL ES2/ES3 features
 # https://emscripten.org/docs/porting/multimedia_and_graphics/OpenGL-support.html#opengl-es-2-0-3-0-emulation
-#add_link_options("SHELL:-s FULL_ES2=1")
+add_link_options("SHELL:-s FULL_ES2=1")
 #add_link_options("SHELL:-s FULL_ES3=1")
 
 # Enable demangling of C++ stack traces
