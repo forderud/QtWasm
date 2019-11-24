@@ -1,0 +1,31 @@
+From 31482e11319b38734af6c7069058e623f30233c2 Mon Sep 17 00:00:00 2001
+From: Fredrik Orderud <fredrik.orderud@ge.com>
+Date: Sun, 24 Nov 2019 21:45:46 +0100
+Subject: [PATCH] Proposed fix for renderbufferStorageMultisample: invalid internalformat
+
+I'm experiencing "INVALID_ENUM: renderbufferStorageMultisample: invalid
+internalformat" when running my Qt application in Chrome 78 after building it for WebAssembly (WASM) against the Qt 5.13 branch using the Emscripten 1.39.3
+(upstream) compiler.
+
+The problem appear to be caused by glRenderbufferStorageMultisample not supporting
+GL_DEPTH_STENCIL directly. Instead, GL_DEPTH24_STENCIL8 or GL_DEPTH32F_STENCIL8
+should be passed.
+
+Change-Id: I777dbc26b1d989950525a434a25ed344389f5059
+Reference: https://www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glRenderbufferStorageMultisample.xhtml
+Fixes: QTBUG-80286
+---
+
+diff --git a/src/gui/opengl/qopenglframebufferobject.cpp b/src/gui/opengl/qopenglframebufferobject.cpp
+index e7631b0..7fecfec 100644
+--- a/src/gui/opengl/qopenglframebufferobject.cpp
++++ b/src/gui/opengl/qopenglframebufferobject.cpp
+@@ -658,7 +658,7 @@
+         funcs.glBindRenderbuffer(GL_RENDERBUFFER, depth_buffer);
+         Q_ASSERT(funcs.glIsRenderbuffer(depth_buffer));
+ 
+-        GLenum storageFormat = GL_DEPTH_STENCIL;
++        GLenum storageFormat = GL_DEPTH24_STENCIL8;
+ 
+         if (samples != 0 ) {
+             funcs.glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples,

@@ -19,6 +19,7 @@ RUN ./init-repository
 # Apply custom patch(es)
 COPY *.diff /development/qt5/
 RUN git apply --directory=qtbase ca9daff.diff # merged to 5.14
+RUN git apply --directory=qtbase 31482e1.diff # https://bugreports.qt.io/browse/QTBUG-80286
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
