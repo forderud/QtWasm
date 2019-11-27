@@ -1,0 +1,38 @@
+From 32aa196202bc5d1b44ba7d0996c0b63cbbb62f9c Mon Sep 17 00:00:00 2001
+From: Lorn Potter <lorn.potter@gmail.com>
+Date: Fri, 06 Apr 2018 15:57:49 +1000
+Subject: [PATCH] webassembly: enable opengl es3
+
+Our WebGL 2 support is half finished, since we use surface format verion of 3
+to map to webgl2, but do not enable Open GL ES3 needed for WebGL2 support.
+
+This allows glDrawArrays and glDrawElements to be used
+
+Change-Id: Ifbd434f4d25e49f671145a6727999a90920d6810
+---
+
+diff --git a/mkspecs/wasm-emscripten/qmake.conf b/mkspecs/wasm-emscripten/qmake.conf
+index 992803e..c69ed9a 100644
+--- a/mkspecs/wasm-emscripten/qmake.conf
++++ b/mkspecs/wasm-emscripten/qmake.conf
+@@ -28,6 +28,7 @@
+ EMCC_COMMON_LFLAGS = \
+     -s WASM=1 \
+     -s FULL_ES2=1 \
++    -s FULL_ES3=1 \
+     -s USE_WEBGL2=1 \
+     -s NO_EXIT_RUNTIME=0 \
+     -s ERROR_ON_UNDEFINED_SYMBOLS=1 \
+diff --git a/src/gui/configure.json b/src/gui/configure.json
+index 19312d2..fe18ba0 100644
+--- a/src/gui/configure.json
++++ b/src/gui/configure.json
+@@ -1314,7 +1314,7 @@
+         },
+         "opengles3": {
+             "label": "OpenGL ES 3.0",
+-            "condition": "features.opengles2 && !features.angle && tests.opengles3 && !config.wasm",
++            "condition": "features.opengles2 && !features.angle && tests.opengles3",
+             "output": [
+                 "publicFeature",
+                 { "type": "define", "name": "QT_OPENGL_ES_3" }
