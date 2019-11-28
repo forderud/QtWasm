@@ -1,0 +1,30 @@
+From 39c47a56ca1fae5e4f6515d669dde91d8a03ebe7 Mon Sep 17 00:00:00 2001
+From: Laszlo Agocs <laszlo.agocs@qt.io>
+Date: Mon, 25 Nov 2019 11:15:22 +0100
+Subject: [PATCH] rhi: gl: Fix ms renderbuffer on WASM with WebGL2
+
+Unlike renderbufferStorage, renderbufferStorageMultisample is not
+guaranteed to accept the unsized GL_DEPTH_STENCIL internalformat. For the
+former, WebGL 2 guarantees it for compatibility for WebGL 1, but the
+multisample version does not exist in WebGL 1, so from the specs it is not
+given at all that the unsized format would be accepted. So use the ES 3.0
+sized format instead, like we would on a "real" ES 3.0 implementation.
+
+Fixes: QTBUG-80296
+Change-Id: I822ae382097085c0a3279c16bb69a173dbf15093
+---
+
+diff --git a/src/gui/rhi/qrhigles2.cpp b/src/gui/rhi/qrhigles2.cpp
+index abee843..b394354 100644
+--- a/src/gui/rhi/qrhigles2.cpp
++++ b/src/gui/rhi/qrhigles2.cpp
+@@ -3147,8 +3147,7 @@
+     switch (m_type) {
+     case QRhiRenderBuffer::DepthStencil:
+         if (rhiD->caps.msaaRenderBuffer && samples > 1) {
+-            const GLenum storage = rhiD->caps.needsDepthStencilCombinedAttach ? GL_DEPTH_STENCIL : GL_DEPTH24_STENCIL8;
+-            rhiD->f->glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, storage,
++            rhiD->f->glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, GL_DEPTH24_STENCIL8,
+                                                       size.width(), size.height());
+             stencilRenderbuffer = 0;
+         } else if (rhiD->caps.packedDepthStencil || rhiD->caps.needsDepthStencilCombinedAttach) {
