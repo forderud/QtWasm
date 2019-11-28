@@ -19,9 +19,9 @@ RUN ./init-repository
 # Apply custom patch(es)
 COPY *.diff /development/qt5/
 RUN git apply --directory=qtbase ca9daff.diff # merged to 5.14
-RUN git apply --directory=qtbase 31482e1.diff # https://bugreports.qt.io/browse/QTBUG-80286
-RUN git apply --directory=qtbase 32aa196.diff # enable Opengl ES3 (https://codereview.qt-project.org/c/qt/qtbase/+/225310)
-RUN git apply --directory=qtbase textureswizzle.diff # https://bugreports.qt.io/browse/QTBUG-80287
+RUN git apply --directory=qtbase 31482e1.diff # merged to 5.14 renderbufferStorageMultisample https://codereview.qt-project.org/c/qt/qtbase/+/282464
+RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
+RUN git apply --directory=qtbase textureswizzle.diff #    5.14 TextureSwizzle https://codereview.qt-project.org/c/qt/qtbase/+/282921
 RUN git apply --directory=qtbase 39c47a5.diff # merged to 5.14 glRenderbufferStorageMultisample https://codereview.qt-project.org/c/qt/qtbase/+/282501
 
 # Build Qt for WASM
