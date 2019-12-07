@@ -1,0 +1,24 @@
+From 78761d5779acd666a86c9a3cffb3d789bcc5d614 Mon Sep 17 00:00:00 2001
+From: Lorn Potter <lorn.potter@gmail.com>
+Date: Tue, 03 Dec 2019 10:21:20 +1000
+Subject: [PATCH] wasm: Fix clamp mode
+
+Clamp mode was being obliterated by not appending to EMCC_COMMON_LFLAGS
+This fixes crashes of integer overflow
+
+Change-Id: Icae757a7189de25db5ed41df6d41d86304c39830
+---
+
+diff --git a/mkspecs/wasm-emscripten/qmake.conf b/mkspecs/wasm-emscripten/qmake.conf
+index 992803e..cde6dac 100644
+--- a/mkspecs/wasm-emscripten/qmake.conf
++++ b/mkspecs/wasm-emscripten/qmake.conf
+@@ -25,7 +25,7 @@
+     -s ASSERTIONS=1 \
+     --profiling-funcs
+ 
+-EMCC_COMMON_LFLAGS = \
++EMCC_COMMON_LFLAGS += \
+     -s WASM=1 \
+     -s FULL_ES2=1 \
+     -s USE_WEBGL2=1 \
