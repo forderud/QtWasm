@@ -22,9 +22,9 @@ COPY *.diff /development/qt5/
 # 5.14 patches
 RUN git apply --directory=qtbase ca9daff.diff # merged to 5.14
 RUN git apply --directory=qtbase 31482e1.diff # merged to 5.14 renderbufferStorageMultisample https://codereview.qt-project.org/c/qt/qtbase/+/282464
-RUN git apply --directory=qtbase textureswizzle.diff #    5.14 TextureSwizzle https://codereview.qt-project.org/c/qt/qtbase/+/282921
+RUN git apply --directory=qtbase textureswizzle.diff # merged to 5.14 TextureSwizzle https://codereview.qt-project.org/c/qt/qtbase/+/282921
 #RUN git apply --directory=qtbase 39c47a5.diff # merged to 5.14 glRenderbufferStorageMultisample https://codereview.qt-project.org/c/qt/qtbase/+/282501
-#RUN git apply --directory=qtbase 78761d5.diff # submitted to 5.14 Fix clamp mode https://codereview.qt-project.org/c/qt/qtbase/+/283458
+#RUN git apply --directory=qtbase 78761d5.diff # merged to 5.14 Fix clamp mode https://codereview.qt-project.org/c/qt/qtbase/+/283458
 
 # 5.15 patches
 RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
