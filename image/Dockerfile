@@ -29,6 +29,7 @@ RUN git apply --directory=qtbase textureswizzle.diff #    5.14 TextureSwizzle ht
 # 5.15 patches
 RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
 RUN git apply --directory=qtbase a3f62d7.diff # merged to 5.15 wasm: platform qsettings (IDBFS not defined) https://codereview.qt-project.org/c/qt/qtbase/+/264618
+RUN git apply --directory=qtbase c978de9.diff # merged to 5.15 set focus on canvas on new screen (https://codereview.qt-project.org/c/qt/qtbase/+/266296)
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build

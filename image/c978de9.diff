@@ -1,0 +1,25 @@
+From c978de990b6c448184e13a3c45d9aa268492b48a Mon Sep 17 00:00:00 2001
+From: Lorn Potter <lorn.potter@gmail.com>
+Date: Wed, 26 Jun 2019 13:23:12 +1000
+Subject: [PATCH] wasm: set focus on canvas on new screen
+
+This allows user to utilize the application without having to click on
+it first to cause the focus-in event.
+
+Change-Id: Ibc9582254dda91eb14ebcdf4b8ea4a4f862aa88d
+Reviewed-by: Morten Johan Sørvig <morten.sorvig@qt.io>
+---
+
+diff --git a/src/plugins/platforms/wasm/qwasmscreen.cpp b/src/plugins/platforms/wasm/qwasmscreen.cpp
+index 37f1ea8..b6c9b9e 100644
+--- a/src/plugins/platforms/wasm/qwasmscreen.cpp
++++ b/src/plugins/platforms/wasm/qwasmscreen.cpp
+@@ -54,6 +54,8 @@
+     m_compositor = new QWasmCompositor(this);
+     m_eventTranslator = new QWasmEventTranslator(this);
+     updateQScreenAndCanvasRenderSize();
++    emscripten::val canvas = emscripten::val::global(m_canvasId.toUtf8().constData());
++    canvas.call<void>("focus");
+ }
+ 
+ QWasmScreen::~QWasmScreen()
