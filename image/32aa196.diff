@@ -16,7 +16,7 @@ index 992803e..c69ed9a 100644
 --- a/mkspecs/wasm-emscripten/qmake.conf
 +++ b/mkspecs/wasm-emscripten/qmake.conf
 @@ -28,6 +28,7 @@
- EMCC_COMMON_LFLAGS = \
+ EMCC_COMMON_LFLAGS += \
      -s WASM=1 \
      -s FULL_ES2=1 \
 +    -s FULL_ES3=1 \
