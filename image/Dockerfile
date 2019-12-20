@@ -45,6 +45,9 @@ RUN update-ca-certificates
 # Copy Qt binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-5.14.1/ /usr/local/Qt-5.14.1/
 
+# Copy 5.14 CMake hotfix (https://bugreports.qt.io/browse/QTBUG-79547)
+COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.14.1/lib/cmake/Qt5Gui/
+
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 # Activate backports to get more recent version of Boost
