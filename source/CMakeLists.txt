@@ -27,6 +27,9 @@ add_executable(helloworld ${SOURCE} ${qml_QRC})
 # Use the Qml/Quick modules from Qt 5.
 target_link_libraries(helloworld PRIVATE Qt5::Qml Qt5::Quick)
 
+configure_file(example.txt example.txt COPYONLY)
+target_link_libraries(helloworld PRIVATE "--preload-file example.txt")
+
 if(EMSCRIPTEN)
   link_qt_static(helloworld)
   
