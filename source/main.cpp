@@ -6,9 +6,6 @@
 #include <iostream>
 
 #if QT_FEATURE_static > 0
-#ifdef EMSCRIPTEN
-Q_IMPORT_PLUGIN(QWasmIntegrationPlugin)
-#endif
 // import Qt plugins (needed for CMake builds)
 Q_IMPORT_PLUGIN(QtQuick2Plugin)       // QtQuick
 Q_IMPORT_PLUGIN(QtQuick2WindowPlugin) // QtQuick.Window

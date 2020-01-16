@@ -37,6 +37,5 @@ if(EMSCRIPTEN)
   target_link_libraries(helloworld PRIVATE
     "${_qt5Core_install_prefix}/qml/QtQuick.2/libqtquick2plugin.a"      # QtQuick2Plugin
     "${_qt5Core_install_prefix}/qml/QtQuick/Window.2/libwindowplugin.a" # QtQuick2WindowPlugin
-    "${_qt5Core_install_prefix}/lib/libQt5Quick.a"
   )
 endif()
