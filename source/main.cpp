@@ -5,12 +5,6 @@
 #include <fstream>
 #include <iostream>
 
-#if QT_FEATURE_static > 0
-// import Qt plugins (needed for CMake builds)
-Q_IMPORT_PLUGIN(QtQuick2Plugin)       // QtQuick
-Q_IMPORT_PLUGIN(QtQuick2WindowPlugin) // QtQuick.Window
-#endif
-
 
 static void PrintFileContent (const char * filename) {
     std::ifstream myfile (filename);
