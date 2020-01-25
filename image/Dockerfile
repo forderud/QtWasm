@@ -19,6 +19,9 @@ RUN ./init-repository
 # Apply custom patch(es)
 COPY *.diff /development/qt5/
 
+# 5.14 patches
+RUN git apply --directory=qtbase  Revert-Wasm-event-loop-wakeup.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/280199
+
 # 5.15 patches
 RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
 RUN git apply --directory=qtbase a3f62d7.diff # merged to 5.15 wasm: platform qsettings (IDBFS not defined) https://codereview.qt-project.org/c/qt/qtbase/+/264618
