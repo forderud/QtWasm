@@ -12,7 +12,7 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Clone Qt sources
-RUN git clone --branch=5.14 https://code.qt.io/qt/qt5.git
+RUN git clone --branch=5.15 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 #RUN git checkout -b new_branch 8405c73f8e4669916bbb320a907f52e234e7bbed # 2020-02-04
 RUN ./init-repository
@@ -23,11 +23,6 @@ COPY *.diff /development/qt5/
 # 5.14 patches
 RUN git apply --directory=qtbase  Revert-Wasm-event-loop-wakeup.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/280199
 RUN git apply --directory=qtbase  Revert-QWasmString.diff      # revert https://codereview.qt-project.org/c/qt/qtbase/+/288433
-
-# 5.15 patches
-RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
-RUN git apply --directory=qtbase a3f62d7.diff # merged to 5.15 wasm: platform qsettings (IDBFS not defined) https://codereview.qt-project.org/c/qt/qtbase/+/264618
-RUN git apply --directory=qtbase c978de9.diff # merged to 5.15 set focus on canvas on new screen (https://codereview.qt-project.org/c/qt/qtbase/+/266296)
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
@@ -48,10 +43,10 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
-COPY --from=qtbuilder /usr/local/Qt-5.14.2/ /usr/local/Qt-5.14.2/
+COPY --from=qtbuilder /usr/local/Qt-5.15.0/ /usr/local/Qt-5.15.0/
 
 # Copy 5.14 CMake hotfix (https://bugreports.qt.io/browse/QTBUG-79547)
-COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.14.2/lib/cmake/Qt5Gui/
+COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.15.0/lib/cmake/Qt5Gui/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -65,14 +60,14 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.14.2 /project/Qt                          && \
+    ln -s /usr/local/Qt-5.15.0 /project/Qt                          && \
     ln -s /emsdk_portable      /emsdk_portable/emscripten                 # TODO: Remove after next Emscripten upgrade
 
 # Add qmake to PATH (doesn't seem to work)
-#ENV PATH="/usr/local/Qt-5.14.2/bin:${PATH}"
+#ENV PATH="/usr/local/Qt-5.15.0/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.14.2 /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.15.0 /project/source && make
