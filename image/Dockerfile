@@ -48,10 +48,10 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
-COPY --from=qtbuilder /usr/local/Qt-5.14.1/ /usr/local/Qt-5.14.1/
+COPY --from=qtbuilder /usr/local/Qt-5.14.2/ /usr/local/Qt-5.14.2/
 
 # Copy 5.14 CMake hotfix (https://bugreports.qt.io/browse/QTBUG-79547)
-COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.14.1/lib/cmake/Qt5Gui/
+COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.14.2/lib/cmake/Qt5Gui/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -65,14 +65,14 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.14.1 /project/Qt                          && \
+    ln -s /usr/local/Qt-5.14.2 /project/Qt                          && \
     ln -s /emsdk_portable      /emsdk_portable/emscripten                 # TODO: Remove after next Emscripten upgrade
 
 # Add qmake to PATH (doesn't seem to work)
-#ENV PATH="/usr/local/Qt-5.14.1/bin:${PATH}"
+#ENV PATH="/usr/local/Qt-5.14.2/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.14.1 /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.14.2 /project/source && make
