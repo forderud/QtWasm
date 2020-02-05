@@ -14,7 +14,7 @@ RUN update-ca-certificates
 # Clone Qt sources
 RUN git clone --branch=5.14 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
-RUN git checkout -b new_branch fb0c74c862c3fd09a908fa2bb0fbea76e8ed8c26 # 2020-01-26
+RUN git checkout -b new_branch 311e9abd1e15242a23821189b254524dd56e48ef # 2020-01-31
 RUN ./init-repository
 
 # Apply custom patch(es)
