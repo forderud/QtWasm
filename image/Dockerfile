@@ -14,7 +14,7 @@ RUN update-ca-certificates
 # Clone Qt sources
 RUN git clone --branch=5.14 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
-RUN git checkout -b new_branch d42e5bda8850b2163a1ba137d9574e37a6617357 # 2020-01-23
+RUN git checkout -b new_branch fb0c74c862c3fd09a908fa2bb0fbea76e8ed8c26 # 2020-01-26
 RUN ./init-repository
 
 # Apply custom patch(es)
@@ -22,6 +22,7 @@ COPY *.diff /development/qt5/
 
 # 5.14 patches
 RUN git apply --directory=qtbase  Revert-Wasm-event-loop-wakeup.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/280199
+RUN git apply --directory=qtbase  revert-wasm-string-conv.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/286997
 
 # 5.15 patches
 RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
