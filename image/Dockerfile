@@ -18,11 +18,8 @@ WORKDIR /development/qt5
 RUN ./init-repository
 
 # Apply custom patch(es)
-COPY *.diff /development/qt5/
+#COPY *.diff /development/qt5/
 
-# 5.14 patches
-RUN git apply --directory=qtbase  Revert-Wasm-event-loop-wakeup.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/280199
-RUN git apply --directory=qtbase  Revert-QWasmString.diff      # revert https://codereview.qt-project.org/c/qt/qtbase/+/288433
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
