@@ -23,7 +23,6 @@ COPY *.diff /development/qt5/
 # 5.14 patches
 RUN git apply --directory=qtbase  Revert-Wasm-event-loop-wakeup.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/280199
 RUN git apply --directory=qtbase  Revert-QWasmString.diff      # revert https://codereview.qt-project.org/c/qt/qtbase/+/288433
-RUN git apply --directory=qtbase  revert-wasm-string-conv.diff # revert https://codereview.qt-project.org/c/qt/qtbase/+/286997
 
 # 5.15 patches
 RUN git apply --directory=qtbase 32aa196.diff # merged to 5.15 enable Opengl ES3 https://codereview.qt-project.org/c/qt/qtbase/+/225310
