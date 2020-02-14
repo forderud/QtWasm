@@ -10,6 +10,12 @@ list(APPEND CMAKE_FIND_ROOT_PATH "/")
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html#c-exceptions
 add_compile_options(-fexceptions)
 
+# Enable threading also in non-Qt projects
+# https://emscripten.org/docs/porting/pthreads.html
+add_compile_options(-pthread)
+add_link_options("SHELL:-s USE_PTHREADS=1")
+
+
 find_package(Qt6 COMPONENTS Core QUIET)
 if(Qt6_FOUND)
     include(${QT6_INSTALL_PREFIX}/lib/cmake/Qt6/QtPublicWasmToolchainHelpers.cmake)
