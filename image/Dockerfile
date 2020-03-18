@@ -1,5 +1,5 @@
 # Based on https://hub.docker.com/r/trzeci/emscripten-upstream
-FROM trzeci/emscripten-upstream:1.39.8 AS qtbuilder
+FROM trzeci/emscripten-upstream:1.39.10 AS qtbuilder
 
 RUN mkdir -p /development
 WORKDIR /development
@@ -29,7 +29,7 @@ RUN make -j `grep -c '^processor' /proc/cpuinfo`
 RUN make install
 
 
-FROM trzeci/emscripten-upstream:1.39.8
+FROM trzeci/emscripten-upstream:1.39.10
 
 # install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
@@ -47,11 +47,10 @@ COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.15.0/lib/cmake/Qt5Gui/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
-# Activate backports to get more recent version of Boost
-RUN echo "deb http://deb.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
 RUN apt-get update && apt-get -y install \
-    libeigen3-dev && \
-    apt-get -t stretch-backports -y install libboost1.67-dev   # https://packages.debian.org/stretch/libboost-dev
+    libeigen3-dev    \
+    libboost1.67-dev   # https://packages.debian.org/buster/libboost-dev
+
 # Make symlinks to avoid adding /usr/include to include dirs.
 RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib && \
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
