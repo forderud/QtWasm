@@ -14,10 +14,10 @@ RUN update-ca-certificates
 # Clone Qt sources
 RUN git clone --branch=5.15 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
-#RUN git checkout -b new_branch 8405c73f8e4669916bbb320a907f52e234e7bbed # 2020-02-04
 RUN ./init-repository
 
 # Apply custom patch(es)
+RUN cd qtbase; git checkout -b new_branch 1d5eb202b928dc7c73fc0fc4eb480817b339c68a # wasm: Add OpenGL version check (https://codereview.qt-project.org/c/qt/qtbase/+/293520)
 #COPY *.diff /development/qt5/
 
 
