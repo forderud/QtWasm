@@ -17,7 +17,7 @@ WORKDIR /development/qt5
 RUN ./init-repository
 
 # Apply custom patch(es)
-RUN cd qtbase; git checkout -b new_branch 1d5eb202b928dc7c73fc0fc4eb480817b339c68a # wasm: Add OpenGL version check (https://codereview.qt-project.org/c/qt/qtbase/+/293520)
+#RUN cd qtbase; git checkout -b new_branch 1d5eb202b928dc7c73fc0fc4eb480817b339c68a # wasm: Add OpenGL version check (https://codereview.qt-project.org/c/qt/qtbase/+/293520)
 #COPY *.diff /development/qt5/
 
 
