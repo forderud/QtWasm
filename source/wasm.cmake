@@ -34,6 +34,10 @@ add_link_options("SHELL:-s DISABLE_EXCEPTION_CATCHING=0")
 # Required by https://codereview.qt-project.org/c/qt/qtbase/+/286997 (since Qt 5.14)
 add_link_options("SHELL:-s EXTRA_EXPORTED_RUNTIME_METHODS=[UTF16ToString,stringToUTF16]")
 
+# Enable Fetch API
+# https://emscripten.org/docs/api_reference/fetch.html
+add_link_options("SHELL:-s FETCH=1")
+
 # Generate HTML file for each executable
 #SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 
