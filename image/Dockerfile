@@ -18,8 +18,8 @@ RUN ./init-repository
 
 # Apply custom patch(es)
 #RUN cd qtbase; git checkout -b new_branch 1d5eb202b928dc7c73fc0fc4eb480817b339c68a # wasm: Add OpenGL version check (https://codereview.qt-project.org/c/qt/qtbase/+/293520)
-#COPY *.diff /development/qt5/
-
+COPY *.diff /development/qt5/
+RUN git apply --directory=qtbase Fix-linking-of-header-only-Qt5Zlib-for-cmake.diff # 5.15: https://codereview.qt-project.org/c/qt/qtbase/+/296134
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
@@ -41,9 +41,6 @@ RUN update-ca-certificates
 
 # Copy Qt binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-5.15.0/ /usr/local/Qt-5.15.0/
-
-# Copy 5.14 CMake hotfix (https://bugreports.qt.io/browse/QTBUG-79547)
-COPY Qt5Gui_QTiffPlugin.cmake /usr/local/Qt-5.15.0/lib/cmake/Qt5Gui/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/

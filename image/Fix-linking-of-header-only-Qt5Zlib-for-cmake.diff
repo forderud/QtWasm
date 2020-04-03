@@ -1,0 +1,31 @@
+From 7573c2d63bd9f4d617fc6e9b8086230176a8267a Mon Sep 17 00:00:00 2001
+From: Fredrik Orderud <forderud@gmail.com>
+Date: Fri, 3 Apr 2020 14:24:07 +0200
+Subject: [PATCH] [PATCH] Fix linking of header only Qt5Zlib for cmake static
+ builds
+
+Fixes: QTBUG-79547
+---
+ mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in b/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in
+index 59b34453f9..309798a767 100644
+--- a/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in
++++ b/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in
+@@ -405,8 +405,12 @@ if (NOT TARGET Qt5::$${CMAKE_MODULE_NAME})
+ !!ENDIF
+     endif()
+ 
++!!IF equals(TEMPLATE, aux)
++    add_library(Qt5::$${CMAKE_MODULE_NAME} INTERFACE IMPORTED)
++!!ELSE
+     add_library(Qt5::$${CMAKE_MODULE_NAME} STATIC IMPORTED)
+     set_property(TARGET Qt5::$${CMAKE_MODULE_NAME} PROPERTY IMPORTED_LINK_INTERFACE_LANGUAGES "CXX")
++!!ENDIF
+ !!ELSE
+ !!IF equals(TEMPLATE, aux)
+     add_library(Qt5::$${CMAKE_MODULE_NAME} INTERFACE IMPORTED)
+-- 
+2.25.1.windows.1
+
