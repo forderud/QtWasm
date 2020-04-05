@@ -53,8 +53,7 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.15.0 /project/Qt                          && \
-    ln -s /emsdk_portable      /emsdk_portable/emscripten                 # TODO: Remove after next Emscripten upgrade
+    ln -s /usr/local/Qt-5.15.0 /project/Qt
 
 # Add qmake to PATH (doesn't seem to work)
 #ENV PATH="/project/Qt/bin:${PATH}"
