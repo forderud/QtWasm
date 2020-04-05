@@ -57,10 +57,10 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /emsdk_portable      /emsdk_portable/emscripten                 # TODO: Remove after next Emscripten upgrade
 
 # Add qmake to PATH (doesn't seem to work)
-#ENV PATH="/usr/local/Qt-5.15.0/bin:${PATH}"
+#ENV PATH="/project/Qt/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/local/Qt-5.15.0 /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/project/Qt /project/source && make
