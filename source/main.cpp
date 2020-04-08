@@ -19,6 +19,12 @@ static void PrintFileContent (const char * filename) {
 int main(int argc, char *argv[])
 {
     PrintFileContent("example.txt");
+	
+	try {
+		throw std::runtime_error("Hello runtime_error\n");
+	} catch (std::exception & e) {
+		std::cout << "EXCEPTION: " << e.what();
+	}
 
     QGuiApplication app(argc, argv);
 

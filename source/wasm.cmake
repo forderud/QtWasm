@@ -28,6 +28,7 @@ add_link_options("SHELL:-s ALLOW_MEMORY_GROWTH=1")
 
 # Enable C++ exception catching
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html#c-exceptions
+add_compile_options(-fexceptions)
 add_link_options("SHELL:-s DISABLE_EXCEPTION_CATCHING=0")
 
 # Export UTF16ToString,stringToUTF16
