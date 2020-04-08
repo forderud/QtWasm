@@ -40,7 +40,7 @@ RUN cmake --install .
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -feature-wasm-simd128 -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
+RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -debug -xplatform wasm-emscripten -feature-wasm-simd128 -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
 RUN cmake --build . $EXTRA_BUILD_PARAMS
 RUN cmake --install .
 
@@ -54,7 +54,7 @@ WORKDIR /build/hdf5-1.8.23
 #inject wasm specific flags in the projects
 RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps \
     -DHDF5_INSTALL_CMAKE_DIR=lib/cmake/ \
-    -DCMAKE_BUILD_TYPE:STRING=Release \
+    -DCMAKE_BUILD_TYPE:STRING=Debug \
     -DBUILD_SHARED_LIBS:BOOL=OFF \
     -DBUILD_TESTING:BOOL=OFF \
     -DHDF5_BUILD_CPP_LIB:BOOL=ON \
@@ -124,4 +124,4 @@ RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && mkdir -p /
 WORKDIR /project/build
 
 # Default build command will explicitly target wasm
-CMD /opt/Qt/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
+CMD /opt/Qt/bin/qt-cmake -DCMAKE_BUILD_TYPE=Debug -G Ninja /project/source && ninja
