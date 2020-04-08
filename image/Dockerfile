@@ -40,7 +40,7 @@ RUN cmake --install .
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -feature-wasm-simd128 -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
+RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -debug -xplatform wasm-emscripten -feature-wasm-simd128 -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
 RUN cmake --build . $EXTRA_BUILD_PARAMS
 RUN cmake --install .
 
@@ -57,7 +57,7 @@ RUN git apply "0001-Only-clear-FE_INVALID-when-that-symbol-is-present-on.patch" 
 #inject wasm specific flags in the projects
 RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps \
     -DHDF5_INSTALL_CMAKE_DIR=lib/cmake/ \
-    -DCMAKE_BUILD_TYPE:STRING=Release \
+    -DCMAKE_BUILD_TYPE:STRING=Debug \
     -DBUILD_SHARED_LIBS:BOOL=OFF \
     -DBUILD_TESTING:BOOL=OFF \
     -DHDF5_ENABLE_Z_LIB_SUPPORT:BOOL=OFF \
@@ -129,4 +129,4 @@ RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && mkdir -p /
 WORKDIR /project/build
 
 # Default build command will explicitly target wasm
-CMD /opt/Qt/bin/qt-cmake -DQT_CHAINLOAD_TOOLCHAIN_FILE=/opt/wasm-deps/share/cmake/wasm.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
+CMD /opt/Qt/bin/qt-cmake -DQT_CHAINLOAD_TOOLCHAIN_FILE=/opt/wasm-deps/share/cmake/wasm.cmake -DCMAKE_BUILD_TYPE=Debug -G Ninja /project/source && ninja
