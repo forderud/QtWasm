@@ -1,5 +1,7 @@
 # Configure WebAssembly build settings
 # For some reason, the build settings need to be provided through the linker.
+# Most flags are configured to match Qt qmake
+# See EMCC_COMMON_LFLAGS in https://github.com/qt/qtbase/blob/dev/mkspecs/wasm-emscripten/qmake.conf
 
 # Activate Embind C/C++ bindings
 # https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html
