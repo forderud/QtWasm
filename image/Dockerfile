@@ -16,10 +16,8 @@ RUN git clone --branch=5.15 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
 
-# Apply custom patch(es)
-#RUN cd qtbase; git checkout -b new_branch 1d5eb202b928dc7c73fc0fc4eb480817b339c68a # wasm: Add OpenGL version check (https://codereview.qt-project.org/c/qt/qtbase/+/293520)
-COPY *.diff /development/qt5/
-RUN git apply --directory=qtbase Fix-linking-of-header-only-Qt5Zlib-for-cmake.diff # 5.15: https://codereview.qt-project.org/c/qt/qtbase/+/296134
+# Apply custom patches
+#COPY *.diff /development/qt5/
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
