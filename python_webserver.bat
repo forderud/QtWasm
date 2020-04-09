@@ -1,2 +1,2 @@
 cd build
-python.exe -m SimpleHTTPServer 8080
+"C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\python.exe" -m http.server 8080
