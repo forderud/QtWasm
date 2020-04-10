@@ -30,6 +30,7 @@ add_link_options("SHELL:-s EXIT_RUNTIME=1")
 # Allows amount of memory used to change 
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html#memory-growth
 add_link_options("SHELL:-s ALLOW_MEMORY_GROWTH=1")
+#add_link_options("SHELL:-s MAXIMUM_MEMORY=1GB") # required when combining USE_PTHREADS with ALLOW_MEMORY_GROWTH
 
 # Enable C++ exception catching
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html#c-exceptions
