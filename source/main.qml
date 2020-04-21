@@ -2,23 +2,20 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 
 // main window
-Window {	
+Window {
     visible: true
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            	Qt.quit();
+            Qt.quit();
         }
     }
 
-	Rectangle {
-		anchors.fill: parent
-		Text {
-			anchors.centerIn: parent
-			text: "Hello World"			
-		}
-	}
-
+    Rectangle {
+        anchors.fill: parent
+        Text {
+            anchors.centerIn: parent
+            text: "Platform: "+Qt.platform.os
+        }
+    }
 }
-
-
