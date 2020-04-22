@@ -17,7 +17,7 @@ WORKDIR /development/qt5
 RUN ./init-repository
 
 # Apply custom patches
-RUN cd qtdeclarative; git checkout -b new_branch 6555642db7b3b992335f98dc01863db4beea3fd4 # WebAssembly platform detection from QML https://codereview.qt-project.org/c/qt/qtdeclarative/+/297672
+RUN cd qtdeclarative; git checkout -b new_branch 7513e896726f0dfc6e290b638c83ae45e4deb88a # Fix broken WebAssembly platform detection https://codereview.qt-project.org/c/qt/qtdeclarative/+/297887
 #COPY *.diff /development/qt5/
 
 # Build Qt for WASM
