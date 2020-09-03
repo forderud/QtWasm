@@ -9,11 +9,10 @@ SHELL ["cmd", "/S", "/C"]
 # Download VS2019 bootstrapper.
 ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
 
-# Install VCTools workload
+# Install C++ workload with CMake
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --installPath C:\BuildTools `
-    --add Microsoft.VisualStudio.Workload.VCTools `
-    --includeRecommended `
+    --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
 # Define the entry point for the docker container.
