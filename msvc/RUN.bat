@@ -4,4 +4,4 @@ docker run --rm -it -m 4GB buildtools2019
 ::docker run -it buildtools2019
 
 
-::pause
+pause
