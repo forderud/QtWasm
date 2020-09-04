@@ -6,6 +6,11 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
 
+# Configure GE proxy (needed since vs_buildtools doesn't seem to pick up proxy settings from Docker)
+# WARNING: Doesn't seem to work
+# COPY GE_proxy.reg C:\\TEMP\\GE_proxy.reg
+# RUN "reg import C:\\TEMP\\GE_proxy.reg"
+
 # Download VS2019 bootstrapper.
 ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
 
