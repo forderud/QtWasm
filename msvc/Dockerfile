@@ -15,7 +15,7 @@ RUN "fsutil volume diskfree c:"
 # Install C++ workload with CMake
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --installPath C:\BuildTools `
-    --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended `
+    --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended;includeOptional `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
 # Define the entry point for the docker container.
