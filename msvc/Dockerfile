@@ -32,5 +32,4 @@ RUN mkdir %APPDATA%\Qt && copy C:\TEMP\*.ini %APPDATA%\Qt\
 RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noninteractive.qs --platform=minimal --logging-rules "ifw.*=true" --verbose
 
 # start developer command prompt
-ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
-
+ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat && CMD ["cmd.exe"]
