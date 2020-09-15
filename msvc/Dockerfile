@@ -23,6 +23,12 @@ RUN choco install -y python && `
     choco install -y git && `
     choco install -y svn
 
+# Install Qt
+ADD http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe C:\TEMP\qt-unified-windows-x86-online.exe
+ADD qt-installer-noninteractive.qs C:\TEMP\qt-installer-noninteractive.qs
+
+RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noninteractive.qs --platform=minimal --logging-rules "ifw.*=true" --verbose
+
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
 ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
