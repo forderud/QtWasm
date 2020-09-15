@@ -15,6 +15,9 @@ RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended;includeOptional `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
+# Install Chocolatey (based on https://chocolatey.org/install#individual)
+RUN powershell -ExecutionPolicy Bypass -Command [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
 ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
