@@ -4,6 +4,8 @@
 :: https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-storage#storage-limits
 :: RUN "fsutil volume diskfree c:"
 
+:: Copy Qt license files
+copy %APPDATA%\Qt\*.ini .
 
 docker build -t buildtools2019:latest -m 4GB .
 

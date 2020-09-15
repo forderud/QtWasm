@@ -26,6 +26,10 @@ RUN choco install -y python && `
 # Install Qt
 ADD http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe C:\TEMP\qt-unified-windows-x86-online.exe
 ADD qt-installer-noninteractive.qs C:\TEMP\qt-installer-noninteractive.qs
+# Copy Qt license from host
+COPY qtaccount.ini  C:\TEMP\qtaccount.ini
+COPY qtlicenses.ini C:\TEMP\qtlicenses.ini
+RUN mkdir %APPDATA%\Qt && copy C:\TEMP\*.ini %APPDATA%\Qt\
 
 RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noninteractive.qs --platform=minimal --logging-rules "ifw.*=true" --verbose
 
