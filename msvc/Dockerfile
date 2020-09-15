@@ -8,8 +8,7 @@ SHELL ["cmd", "/S", "/C"]
 
 # Download VS2019 bootstrapper.
 ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
-
-# Install C++ workload with CMake
+# Install Visual C++ workload with CMake
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --installPath C:\BuildTools `
     --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended;includeOptional `
