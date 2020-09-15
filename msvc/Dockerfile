@@ -8,6 +8,7 @@ SHELL ["cmd", "/S", "/C"]
 
 # Install Visual C++ workload with CMake
 # REF: https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container?view=vs-2019
+# REF: https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019
 ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
 RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --installPath C:\BuildTools `
