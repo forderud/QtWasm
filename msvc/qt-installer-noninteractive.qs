@@ -18,6 +18,12 @@ Controller.prototype.IntroductionPageCallback = function() {
     gui.clickButton(buttons.NextButton);
 }
 
+Controller.prototype.DynamicTelemetryPluginFormCallback = function() {
+    var widget = gui.currentPageWidget();
+    widget.TelemetryPluginForm.statisticGroupBox.disableStatisticRadioButton.checked = true;
+    gui.clickButton(buttons.NextButton);
+}
+
 Controller.prototype.TargetDirectoryPageCallback = function()
 {
     gui.clickButton(buttons.NextButton);
