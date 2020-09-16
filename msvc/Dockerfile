@@ -31,6 +31,7 @@ COPY *.ini  C:\TEMP\
 RUN mkdir %APPDATA%\Qt && copy C:\TEMP\*.ini %APPDATA%\Qt\
 # Install Qt
 RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noninteractive.qs --platform=minimal --logging-rules "ifw.*=true" --verbose
+ENV QT_ROOT_64=C:\Qt\5.15.1\msvc2019_64
 
 # start developer command prompt
 ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat && CMD ["cmd.exe"]
