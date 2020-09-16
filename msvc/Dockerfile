@@ -7,6 +7,7 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
 SHELL ["cmd", "/S", "/C"]
 
 # Add GE root certificate
+# REF: https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html
 COPY GE_External_Root_CA_2_1.cer  C:\TEMP\
 RUN certutil –addstore –f "root" C:\TEMP\GE_External_Root_CA_2_1.cer
 
