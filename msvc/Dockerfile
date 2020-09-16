@@ -23,6 +23,9 @@ RUN choco install -y python && `
     choco install -y git && `
     choco install -y svn
 
+# Install Python comtypes & numpy modules
+# RUN pip install comtypes numpy
+
 # Download Qt installer
 ADD http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe C:\TEMP\qt-unified-windows-x86-online.exe
 ADD qt-installer-noninteractive.qs C:\TEMP\qt-installer-noninteractive.qs
