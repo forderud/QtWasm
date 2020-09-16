@@ -34,7 +34,7 @@ RUN choco install -y python && `
     choco install -y svn
 
 # Install Python comtypes & numpy modules
-# RUN pip install comtypes numpy
+RUN pip install comtypes numpy
 
 # start developer command prompt
 ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat && CMD ["cmd.exe"]
