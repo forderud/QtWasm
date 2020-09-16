@@ -33,7 +33,7 @@ RUN choco install -y python && `
     choco install -y git && `
     choco install -y svn
 
-# Install Python comtypes & numpy modules
+# Install Python modules
 RUN pip install comtypes numpy
 
 # start developer command prompt
