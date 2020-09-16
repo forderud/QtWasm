@@ -6,6 +6,10 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
 
+# Add GE root certificate
+COPY GE_External_Root_CA_2_1.cer  C:\TEMP\
+RUN certutil –addstore –f "root" C:\TEMP\GE_External_Root_CA_2_1.cer
+
 # Install Visual C++ workload with CMake
 # REF: https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container?view=vs-2019
 # REF: https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019
