@@ -26,7 +26,8 @@ RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noni
 ENV QT_ROOT_64=C:\Qt\5.15.1\msvc2019_64
 
 # Install Chocolatey (based on https://chocolatey.org/install#individual)
-RUN powershell -ExecutionPolicy Bypass -Command [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+RUN powershell -ExecutionPolicy Bypass -Command [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+    iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 # Install Python, Git & SVN
 RUN choco install -y python && `
