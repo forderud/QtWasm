@@ -11,11 +11,13 @@ SHELL ["cmd", "/S", "/C"]
 COPY GE_External_Root_CA_2_1.cer  C:\TEMP\
 RUN certutil –addstore –f "root" C:\TEMP\GE_External_Root_CA_2_1.cer
 
-# Configure GE proxy
-RUN netsh winhttp set proxy PITC-Zscaler-EMEA-Amsterdam3PR.proxy.corporate.ge.com:80
+# Configure GE proxy (doesn't work)
+RUN netsh winhttp set proxy proxy-server=PITC-Zscaler-EMEA-Amsterdam3PR.proxy.corporate.ge.com:80 bypass-list="no_proxy=localhost;*.ge.com"
+COPY GE_proxy.reg C:\TEMP\
+#RUN reg import C:\TEMP\GE_proxy.reg
 ENV https_proxy=http://pitc-zscaler-emea-amsterdam3pr.proxy.corporate.ge.com:80
 ENV http_proxy=http://pitc-zscaler-emea-amsterdam3pr.proxy.corporate.ge.com:80
-ENV no_http_proxy=no_proxy=localhost,.ge.com
+ENV no_proxy=localhost,.ge.com
 
 # Install Visual C++ workload with CMake
 # REF: https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container?view=vs-2019

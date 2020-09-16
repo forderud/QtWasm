@@ -6,6 +6,9 @@
 
 :: Copy Qt license files
 copy %APPDATA%\Qt\*.ini .
+:: Export proxy settings from host
+reg export "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" GE_proxy.reg /y
+
 
 docker build -t buildtools2019:latest -m 4GB .
 
