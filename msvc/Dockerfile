@@ -15,6 +15,16 @@ RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
     --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended;includeOptional `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
+# Install Qt
+ADD http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe C:\TEMP\qt-unified-windows-x86-online.exe
+ADD qt-installer-noninteractive.qs C:\TEMP\qt-installer-noninteractive.qs
+# Copy Qt license from host
+COPY *.ini  C:\TEMP\
+RUN mkdir %APPDATA%\Qt && copy C:\TEMP\*.ini %APPDATA%\Qt\
+# Run Qt installer noninteractively in scripted mode
+RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noninteractive.qs --platform=minimal --logging-rules "ifw.*=true" --verbose
+ENV QT_ROOT_64=C:\Qt\5.15.1\msvc2019_64
+
 # Install Chocolatey (based on https://chocolatey.org/install#individual)
 RUN powershell -ExecutionPolicy Bypass -Command [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
@@ -25,16 +35,6 @@ RUN choco install -y python && `
 
 # Install Python comtypes & numpy modules
 # RUN pip install comtypes numpy
-
-# Download Qt installer
-ADD http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe C:\TEMP\qt-unified-windows-x86-online.exe
-ADD qt-installer-noninteractive.qs C:\TEMP\qt-installer-noninteractive.qs
-# Copy Qt license from host
-COPY *.ini  C:\TEMP\
-RUN mkdir %APPDATA%\Qt && copy C:\TEMP\*.ini %APPDATA%\Qt\
-# Install Qt
-RUN C:\TEMP\qt-unified-windows-x86-online.exe --script C:\TEMP\qt-installer-noninteractive.qs --platform=minimal --logging-rules "ifw.*=true" --verbose
-ENV QT_ROOT_64=C:\Qt\5.15.1\msvc2019_64
 
 # start developer command prompt
 ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat && CMD ["cmd.exe"]
