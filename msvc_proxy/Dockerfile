@@ -24,6 +24,6 @@ ENV https_proxy=http://pitc-zscaler-emea-amsterdam3pr.proxy.corporate.ge.com:80
 ENV http_proxy=http://pitc-zscaler-emea-amsterdam3pr.proxy.corporate.ge.com:80
 ENV no_proxy=localhost,.ge.com
 
-# Test network connection
+# Test network connection (uncomment to reproduce)
 #RUN powershell ((New-Object System.Net.WebClient).DownloadString('https://github.build.ge.com')) # does work
-#RUN powershell ((New-Object System.Net.WebClient).DownloadString('https://tools.ietf.org/html/rfc2616')) # remote name could not be resolved: 'www.news.com'
+#RUN powershell ((New-Object System.Net.WebClient).DownloadString('https://tools.ietf.org/html/rfc2616')) # name could not be resolved: 'tools.ietf.org'
