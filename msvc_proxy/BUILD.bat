@@ -1,3 +1,3 @@
-docker build -t ge_proxy:latest -m 4GB .
+docker build -t ge_proxy:latest .
 
 pause
