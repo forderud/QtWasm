@@ -26,4 +26,4 @@ ENV no_proxy=localhost,.ge.com
 
 # Test network connection
 #RUN powershell ((New-Object System.Net.WebClient).DownloadString('https://github.build.ge.com')) # does work
-#RUN powershell ((New-Object System.Net.WebClient).DownloadString('https://tools.ietf.org/html/rfc2616'))        # remote name could not be resolved: 'www.news.com'
+#RUN powershell ((New-Object System.Net.WebClient).DownloadString('https://tools.ietf.org/html/rfc2616')) # remote name could not be resolved: 'www.news.com'
