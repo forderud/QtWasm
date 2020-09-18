@@ -1,3 +1,3 @@
-docker run --rm -it ge_proxy
+docker run --rm -it --network=Internet ge_proxy
 
 pause
