@@ -1,3 +1,3 @@
-docker build -t ge_proxy:latest .
+docker build --network=Internet -t ge_proxy:latest .
 
 pause
