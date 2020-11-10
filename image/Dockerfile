@@ -12,7 +12,7 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Clone Qt sources
-RUN git clone --branch=5.15 https://code.qt.io/qt/qt5.git
+RUN git clone --branch=5.15.2 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
 
