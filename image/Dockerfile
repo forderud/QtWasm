@@ -1,5 +1,5 @@
-# Based on https://hub.docker.com/r/trzeci/emscripten-upstream
-FROM trzeci/emscripten-upstream:1.39.10 AS qtbuilder
+# Based on https://github.com/emscripten-core/emsdk/tree/master/docker
+FROM emscripten/emsdk:1.39.10 AS qtbuilder
 
 RUN mkdir -p /development
 WORKDIR /development
@@ -27,7 +27,7 @@ RUN make -j `grep -c '^processor' /proc/cpuinfo`
 RUN make install
 
 
-FROM trzeci/emscripten-upstream:1.39.10
+FROM emscripten/emsdk:1.39.10
 
 # install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
@@ -60,4 +60,4 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk_portable/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/project/Qt /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk/emscripten/sdk/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/project/Qt /project/source && make
