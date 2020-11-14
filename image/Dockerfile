@@ -46,6 +46,10 @@ RUN apt-get update && apt-get -y install \
     libeigen3-dev    \
     libboost1.67-dev   # https://packages.debian.org/buster/libboost-dev
 
+# Activate backports for more recent version of CMake
+RUN echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list && apt-get update
+RUN apt-get -t buster-backports -y install cmake                   # from https://packages.debian.org/buster-backports/cmake
+
 # Make symlinks to avoid adding /usr/include to include dirs.
 RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib && \
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
