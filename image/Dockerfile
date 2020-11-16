@@ -1,5 +1,5 @@
 # Based on https://github.com/emscripten-core/emsdk/tree/master/docker
-FROM emscripten/emsdk:1.39.16 AS qtbuilder
+FROM emscripten/emsdk:1.39.14 AS qtbuilder
 
 RUN mkdir -p /development
 WORKDIR /development
@@ -27,7 +27,7 @@ RUN make -j `grep -c '^processor' /proc/cpuinfo`
 RUN make install
 
 
-FROM emscripten/emsdk:1.39.16
+FROM emscripten/emsdk:1.39.14
 
 # install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
