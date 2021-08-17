@@ -43,6 +43,7 @@ COPY --from=qtbuilder /usr/local/Qt-5.15.2/ /usr/local/Qt-5.15.2/
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 RUN apt-get update && apt-get -y install \
+    libtool-bin      \
     libeigen3-dev    \
     libboost1.67-dev   # https://packages.debian.org/buster/libboost-dev
 
