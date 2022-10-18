@@ -5,5 +5,3 @@ IF %ERRORLEVEL% EQU 0 (
   :: Push to dockerhub
   docker push forderud/qtwasm:latest
 )
-
-pause
