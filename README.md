@@ -1,5 +1,11 @@
 Dockerfile for building a containerized Qt SW development environment for WebAssembly. The Docker images are published at [forderud/qtwasm](https://hub.docker.com/repository/docker/forderud/qtwasm) on Docker Hub.
 
+## Prerequisites
+Instructions:
+* Download and install Docker desktop from https://www.docker.com/products/docker-desktop/
+* From the settings, configure http and https proxy settings, as well as proxy bypass
+* Start Docker desktop in "Linux container" mode
+
 ## How to build the image
 Look at the scripts in the `image` subfolder.
 
@@ -7,7 +13,7 @@ Look at the scripts in the `image` subfolder.
 From a Windows host:
 * Run either `build_cmake.bat` or `build_qmake.bat` to build the sample project using either QMake or CMake.
 * Run `run_webserver.bat` to start a webserver for serving the Qt app.
-*  Open `http://localhost:80` in a web browser and navigate to the html page to test the web app.
+* Open `http://localhost:80` in a web browser and navigate to the html page to test the web app.
 
 ## References
 * https://blog.qt.io/blog/2019/03/05/using-docker-test-qt-webassembly/
