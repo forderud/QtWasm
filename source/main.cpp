@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
     PrintFileContent("example.txt");
 	
 	try {
-		throw std::runtime_error("Hello runtime_error\n");
+		throw std::runtime_error("Hello runtime_error");
 	} catch (std::exception & e) {
-		std::cout << "EXCEPTION: " << e.what();
+		std::cout << "Exception catching works as expected: " << e.what() << std::endl;
 	}
 
     QGuiApplication app(argc, argv);
