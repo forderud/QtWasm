@@ -14,4 +14,4 @@ docker image rm <name>:<tag>
 
 ## References
 * https://blog.qt.io/blog/2019/03/05/using-docker-test-qt-webassembly/
-* CMake toolkit: https://github.com/emscripten-core/emscripten/blob/incoming/cmake/Modules/Platform/Emscripten.cmake
+* CMake toolkit: https://github.com/emscripten-core/emscripten/blob/main/cmake/Modules/Platform/Emscripten.cmake
