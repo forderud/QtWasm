@@ -1,5 +1,5 @@
 # Based on https://github.com/emscripten-core/emsdk/tree/master/docker
-FROM emscripten/emsdk:1.39.10 AS qtbuilder
+FROM emscripten/emsdk:3.1.27 AS qtbuilder
 
 RUN mkdir -p /development
 
@@ -22,7 +22,7 @@ RUN make -j `nproc`
 RUN make install
 
 
-FROM emscripten/emsdk:1.39.10
+FROM emscripten/emsdk:3.1.27
 
 # Install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
@@ -38,10 +38,6 @@ RUN apt-get update && apt-get -y install \
     libtool-bin      \
     libeigen3-dev    \
     libboost-dev
-
-# Activate backports for more recent version of CMake
-RUN echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list && apt-get update
-RUN apt-get -t buster-backports -y install cmake                   # from https://packages.debian.org/buster-backports/cmake
 
 # Make symlinks to avoid adding /usr/include to include dirs.
 RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib && \
