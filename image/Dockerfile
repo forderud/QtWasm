@@ -10,7 +10,7 @@ RUN update-ca-certificates
 
 # Clone Qt sources
 WORKDIR /development
-RUN git clone --branch=5.15.2 https://code.qt.io/qt/qt5.git
+RUN git clone --branch=6.4 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
 
