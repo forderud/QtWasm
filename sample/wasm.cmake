@@ -56,10 +56,10 @@ list(APPEND CMAKE_FIND_ROOT_PATH "/")
 function(link_qt_static target)
     # copy in Qt HTML/JS launch files
     set(APPNAME ${target})
-    configure_file("${_qt5Core_install_prefix}/plugins/platforms/wasm_shell.html"
+    configure_file("${QT_MOC_EXECUTABLE}/../../plugins/platforms/wasm_shell.html"
                    "${target}.html")
-    configure_file("${_qt5Core_install_prefix}/plugins/platforms/qtloader.js"
+    configure_file("${QT_MOC_EXECUTABLE}/../../plugins/platforms/qtloader.js"
                    qtloader.js COPYONLY)
-    configure_file("${_qt5Core_install_prefix}/plugins/platforms/qtlogo.svg"
+    configure_file("${QT_MOC_EXECUTABLE}/../../plugins/platforms/qtlogo.svg"
                    qtlogo.svg COPYONLY)
 endfunction()
