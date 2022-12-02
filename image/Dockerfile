@@ -8,16 +8,26 @@ RUN mkdir -p /development
 COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
+# Install Mesa OpenGL (needed to build Qt for x64)
+RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
+
 # Clone Qt sources
 WORKDIR /development
 RUN git clone --branch=6.4 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
 
+# Build Qt for x64
+RUN mkdir -p /development/qt5_build_x64
+WORKDIR /development/qt5_build_x64
+RUN /development/qt5/configure -nomake examples -nomake tests -prefix /usr/local/Qt-x64
+RUN make -j `nproc`
+RUN make install
+
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -xplatform wasm-emscripten -nomake examples -prefix /usr/local/Qt-wasm
+RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -nomake examples -prefix /usr/local/Qt-wasm
 RUN make -j `nproc`
 RUN make install
 
@@ -30,6 +40,7 @@ COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
+COPY --from=qtbuilder /usr/local/Qt-x64/  /usr/local/Qt-x64/
 COPY --from=qtbuilder /usr/local/Qt-wasm/ /usr/local/Qt-wasm/
 
 # Install Boost & Eigen
