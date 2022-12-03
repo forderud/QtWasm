@@ -16,9 +16,6 @@ RUN git clone --branch=5.15.2 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
 
-# Apply custom patches
-#COPY *.diff /development/qt5/
-
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
