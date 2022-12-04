@@ -20,7 +20,7 @@ RUN ./init-repository
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
 RUN /development/qt5/configure -xplatform wasm-emscripten -nomake examples
-RUN make -j `grep -c '^processor' /proc/cpuinfo`
+RUN make -j `nproc`
 RUN make install
 
 
