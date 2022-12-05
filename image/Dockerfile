@@ -19,7 +19,7 @@ RUN ./init-repository
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -xplatform wasm-emscripten -nomake examples
+RUN /development/qt5/configure -xplatform wasm-emscripten -nomake examples -prefix /usr/local/Qt-wasm
 RUN make -j `nproc`
 RUN make install
 
@@ -35,7 +35,7 @@ RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
-COPY --from=qtbuilder /usr/local/Qt-5.15.2/ /usr/local/Qt-5.15.2/
+COPY --from=qtbuilder /usr/local/Qt-wasm/ /usr/local/Qt-wasm/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -53,7 +53,7 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
     ln -s /usr/include/boost   /project/dependencies/include/boost  && \
     ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
     ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-5.15.2 /project/Qt
+    ln -s /usr/local/Qt-wasm   /project/Qt
 
 # Add qmake to PATH (doesn't seem to work)
 #ENV PATH="/project/Qt/bin:${PATH}"
