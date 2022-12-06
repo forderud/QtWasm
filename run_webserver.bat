@@ -2,6 +2,8 @@ setlocal enableextensions
 @echo off
 cd build
 
-echo Open http://localhost:80 in a web browser and navigate to the html page to test the web app.
+echo Opening web browser and starting web server...
+
+start http://localhost:80/
 
 python.exe -m http.server 80
