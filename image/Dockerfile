@@ -2,16 +2,14 @@
 FROM emscripten/emsdk:1.39.10 AS qtbuilder
 
 RUN mkdir -p /development
-WORKDIR /development
 
-# install GE root certificate
+# Install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
-# Copy the current directory contents into the container
-COPY GE_External_Root_CA_2_1.crt /development
-RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
+COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Clone Qt sources
+WORKDIR /development
 RUN git clone --branch=5.15.2 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
@@ -26,12 +24,9 @@ RUN make install
 
 FROM emscripten/emsdk:1.39.10
 
-# install GE root certificate
+# Install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
-# Copy the current directory contents into the container
-WORKDIR /development
-COPY GE_External_Root_CA_2_1.crt /development
-RUN cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates/
+COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
