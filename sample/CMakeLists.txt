@@ -25,7 +25,7 @@ set(SOURCE
 )
 
 # Tell CMake to create the helloworld executable
-add_executable(helloworld ${SOURCE} ${qml_QRC})
+qt_add_executable(helloworld ${SOURCE} ${qml_QRC})
 
 # Use the Qml/Quick modules from Qt 5.
 target_link_libraries(helloworld PRIVATE Qt::Qml Qt::Quick)
@@ -37,7 +37,3 @@ target_link_libraries(helloworld PRIVATE Eigen3::Eigen)
 
 configure_file(example.txt example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file example.txt")
-
-if(EMSCRIPTEN)
-  link_qt_static(helloworld)
-endif()
