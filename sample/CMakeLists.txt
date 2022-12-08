@@ -10,7 +10,7 @@ endif()
 set(CMAKE_AUTOMOC ON)
 
 # Find the Qt libraries for Qt Quick/QML
-find_package(Qt6 COMPONENTS Qml Quick Gui QmlImportScanner QUIET)
+find_package(Qt6 COMPONENTS Qml Quick Gui QUIET)
 if(NOT Qt6_FOUND)
     find_package(Qt5 REQUIRED Qml Quick Gui QmlImportScanner)
 endif()
