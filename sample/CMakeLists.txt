@@ -9,6 +9,9 @@ endif()
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+# Find Eigen lib (for compatibility testing)
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+
 # Find the Qt libraries for Qt Quick/QML
 find_package(Qt6 COMPONENTS Qml Quick Gui QUIET)
 if(NOT Qt6_FOUND)
