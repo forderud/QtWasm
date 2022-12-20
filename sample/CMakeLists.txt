@@ -9,9 +9,6 @@ endif()
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-# Find Eigen lib (for compatibility testing)
-find_package(Eigen3 3.3 REQUIRED NO_MODULE)
-
 # Find the Qt libraries for Qt Quick/QML
 find_package(Qt6 COMPONENTS Qml Quick Gui QUIET)
 if(NOT Qt6_FOUND)
@@ -33,6 +30,10 @@ add_executable(helloworld ${SOURCE} ${qml_QRC})
 # Use the Qml/Quick modules from Qt 5.
 target_link_libraries(helloworld PRIVATE Qt::Qml Qt::Quick)
 qt_import_qml_plugins(helloworld)
+
+# Find Eigen lib (for compatibility testing)
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+target_link_libraries(helloworld PRIVATE Eigen3::Eigen)
 
 configure_file(example.txt example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file example.txt")
