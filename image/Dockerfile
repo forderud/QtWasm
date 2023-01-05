@@ -1,5 +1,5 @@
 # Based on https://github.com/emscripten-core/emsdk/tree/master/docker
-FROM emscripten/emsdk:1.39.10 AS qtbuilder
+FROM emscripten/emsdk:3.1.27 AS qtbuilder
 
 RUN mkdir -p /development
 
@@ -8,21 +8,31 @@ RUN mkdir -p /development
 COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
+# Install Mesa OpenGL (needed to build Qt for x64)
+RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
+
 # Clone Qt sources
 WORKDIR /development
-RUN git clone --branch=5.15.2 https://code.qt.io/qt/qt5.git
+RUN git clone --branch=6.4 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN ./init-repository
+
+# Build Qt for x64
+RUN mkdir -p /development/qt5_build_x64
+WORKDIR /development/qt5_build_x64
+RUN /development/qt5/configure -nomake examples -nomake tests -prefix /usr/local/Qt-x64
+RUN cmake --build . --parallel 4
+RUN cmake --install .
 
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -xplatform wasm-emscripten -nomake examples -prefix /usr/local/Qt-wasm
-RUN make -j `nproc`
-RUN make install
+RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -nomake examples -prefix /usr/local/Qt-wasm
+RUN cmake --build . --parallel 4
+RUN cmake --install .
 
 
-FROM emscripten/emsdk:1.39.10
+FROM emscripten/emsdk:3.1.27
 
 # Install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
@@ -30,6 +40,7 @@ COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Copy Qt binaries to new container
+COPY --from=qtbuilder /usr/local/Qt-x64/  /usr/local/Qt-x64/
 COPY --from=qtbuilder /usr/local/Qt-wasm/ /usr/local/Qt-wasm/
 
 # Install Boost & Eigen
@@ -38,10 +49,6 @@ RUN apt-get update && apt-get -y install \
     libtool-bin      \
     libeigen3-dev    \
     libboost-dev
-
-# Activate backports for more recent version of CMake
-RUN echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list && apt-get update
-RUN apt-get -t buster-backports -y install cmake                   # from https://packages.debian.org/buster-backports/cmake
 
 # Make symlinks to avoid adding /usr/include to include dirs.
 RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib && \
