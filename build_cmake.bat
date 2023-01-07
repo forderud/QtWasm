@@ -1,3 +1,6 @@
+:: clean up any previous builds
+rmdir build /s /q
+
 mkdir build
 
 :: Input sources must be found in "sample" subfolder
