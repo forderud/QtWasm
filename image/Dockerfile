@@ -15,6 +15,7 @@ RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1
 WORKDIR /development
 RUN git clone --branch=6.4 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
+RUN git rev-parse HEAD
 RUN ./init-repository
 
 # Build Qt for x64
