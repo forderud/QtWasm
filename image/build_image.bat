@@ -1,5 +1,5 @@
-:: Uncomment to show build output
-::set BUILDKIT_PROGRESS=plain
+:: Uncomment to ease debugging of failed builds
+::set DOCKER_BUILDKIT=false
 
 :: Build container
 docker build --file Dockerfile --tag=forderud/qtwasm:latest .
