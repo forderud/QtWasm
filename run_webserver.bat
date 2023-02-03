@@ -6,4 +6,4 @@ echo Opening web browser and starting web server...
 
 start http://localhost:80/helloworld.html
 
-python.exe -m http.server 80
+..\WebServer.py 80
