@@ -8,8 +8,8 @@ RUN mkdir -p /development
 COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
-# Install Mesa OpenGL (needed to build Qt for x64)
-RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
+# Install Mesa OpenGL and ninja (needed to build Qt for x64)
+RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev ninja-build
 
 # Clone Qt sources
 WORKDIR /development
