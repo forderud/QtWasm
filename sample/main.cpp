@@ -23,13 +23,15 @@ void ThreadFunction () {
 
 int main(int argc, char *argv[])
 {
+    std::cout << "Qt version " << QT_VERSION_STR << std::endl;
+    
     PrintFileContent("example.txt");
-	
-	try {
-		throw std::runtime_error("Hello runtime_error");
-	} catch (std::exception & e) {
-		std::cout << "Exception catching works as expected: " << e.what() << std::endl;
-	}
+    
+    try {
+        throw std::runtime_error("Hello runtime_error");
+    } catch (std::exception & e) {
+        std::cout << "Exception catching works as expected: " << e.what() << std::endl;
+    }
 
     try {
         std::thread t(&ThreadFunction);
