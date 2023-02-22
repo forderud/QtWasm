@@ -53,6 +53,15 @@ int main(int argc, char *argv[])
     }
 
 #ifdef Q_OS_WASM
+    /*
+     * According to https://doc-snapshots.qt.io/qt6-dev/wasm.html#wasm-exceptions
+     * the call to QGuiApplication::exec is not compatible with emscripten
+     * when exceptions are enabled.
+     *
+     * Note that the runtime will not exit when leaving the main function on
+     * this platform.
+     * https://doc-snapshots.qt.io/qt6-dev/wasm.html#application-startup-and-the-event-loop
+     */
     g_app = new QGuiApplication(argc, argv);
     startEngine(g_app);
     return 0;
