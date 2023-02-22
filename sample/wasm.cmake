@@ -15,6 +15,8 @@ add_compile_options(-fexceptions)
 add_compile_options(-pthread)
 add_link_options("SHELL:-s USE_PTHREADS=1")
 
+# Increase stack size (was reduced to 64k in Emscripten 3.1.27)
+add_link_options("SHELL:-sSTACK_SIZE=1MB")
 
 find_package(Qt6 REQUIRED Core QUIET)
 include(${QT6_INSTALL_PREFIX}/lib/cmake/Qt6/QtPublicWasmToolchainHelpers.cmake)
