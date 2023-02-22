@@ -21,6 +21,16 @@ void ThreadFunction () {
     std::cout << "Hello thread\n";
 }
 
+#ifdef Q_OS_WASM
+QGuiApplication*    g_app = nullptr;
+#endif
+
+void startEngine(QObject* parent)
+{
+    QQmlApplicationEngine* engine = new QQmlApplicationEngine(parent);
+    engine->load(QUrl(QStringLiteral("qrc:/main.qml")));
+}
+
 int main(int argc, char *argv[])
 {
     std::cout << "Qt version " << QT_VERSION_STR << std::endl;
@@ -42,10 +52,22 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+#ifdef Q_OS_WASM
+    /*
+     * According to https://doc-snapshots.qt.io/qt6-dev/wasm.html#wasm-exceptions
+     * the call to QGuiApplication::exec is not compatible with emscripten
+     * when exceptions are enabled.
+     *
+     * Note that the runtime will not exit when leaving the main function on
+     * this platform.
+     * https://doc-snapshots.qt.io/qt6-dev/wasm.html#application-startup-and-the-event-loop
+     */
+    g_app = new QGuiApplication(argc, argv);
+    startEngine(g_app);
+    return 0;
+#else
     QGuiApplication app(argc, argv);
-
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-
+    startEngine(&app);
     return app.exec();
+#endif
 }
