@@ -10,16 +10,13 @@ endif()
 set(CMAKE_AUTOMOC ON)
 
 # Find the Qt libraries for Qt Quick/QML
-find_package(Qt6 COMPONENTS Qml Quick Gui QUIET)
-if(NOT Qt6_FOUND)
-    find_package(Qt5 REQUIRED Qml Quick Gui QmlImportScanner)
-endif()
+find_package(Qt6 REQUIRED Qml Quick Gui)
 
 # add the qml.qrc file
 qt_add_resources(qml_QRC qml.qrc)
 
 # add source files
-set(SOURCE 
+set(SOURCE
     ${SOURCE}
     main.cpp
 )
