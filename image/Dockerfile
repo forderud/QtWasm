@@ -47,6 +47,7 @@ COPY --from=qtbuilder /usr/local/Qt-wasm/ /usr/local/Qt-wasm/
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 RUN apt-get update && apt-get -y install \
+    ninja-build      \
     libtool-bin      \
     libeigen3-dev    \
     libboost-dev
@@ -65,4 +66,4 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
 WORKDIR /project/build
 
 # Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/project/Qt /project/source && make
+CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -DCMAKE_PREFIX_PATH=/project/Qt /project/source && ninja
