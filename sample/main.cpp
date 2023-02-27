@@ -34,6 +34,12 @@ void startEngine(QObject* parent)
 int main(int argc, char *argv[])
 {
     std::cout << "Qt version " << QT_VERSION_STR << std::endl;
+	
+#ifdef NDEBUG
+    std::cout << "Release build." << std::endl;
+#else
+    std::cout << "Debug build." << std::endl;
+#endif
     
     PrintFileContent("example.txt");
     
