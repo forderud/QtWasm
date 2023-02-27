@@ -65,5 +65,5 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
 # Build custom sources
 WORKDIR /project/build
 
-# Default build command
-CMD cmake -DCMAKE_TOOLCHAIN_FILE=/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -DCMAKE_PREFIX_PATH=/project/Qt /project/source && ninja
+# Default build command will explicitly target wasm
+CMD /usr/local/Qt-wasm/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
