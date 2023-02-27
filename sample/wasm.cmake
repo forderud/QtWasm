@@ -6,9 +6,5 @@
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
 list(APPEND CMAKE_FIND_ROOT_PATH "/")
 
-# Enable C++ exception catching
-# https://emscripten.org/docs/optimizing/Optimizing-Code.html#c-exceptions
-add_compile_options(-fexceptions)
-
 # Increase stack size (was reduced to 64k in Emscripten 3.1.27)
 add_link_options("SHELL:-sSTACK_SIZE=1MB")
