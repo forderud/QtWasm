@@ -4,6 +4,9 @@ FROM emscripten/emsdk:3.1.27 AS qtbuilder
 # Extra Qt build parameters
 ARG EXTRA_BUILD_PARAMS=
 
+# Qt 6.5 show warnings if default locale is not UTF-8
+ENV LANG=C.UTF-8
+
 RUN mkdir -p /development
 
 # Install GE root certificate
