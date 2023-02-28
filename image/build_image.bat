@@ -2,7 +2,7 @@
 ::set DOCKER_BUILDKIT=false
 
 :: Build container
-docker build --file Dockerfile --tag=forderud/qtwasm:latest .
+docker build --file Dockerfile --build-arg EXTRA_BUILD_PARAMS="--parallel 4" --tag=forderud/qtwasm:latest .
 
 IF %ERRORLEVEL% EQU 0 (
   :: Push to dockerhub
