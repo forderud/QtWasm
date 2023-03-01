@@ -72,4 +72,4 @@ RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib
 WORKDIR /project/build
 
 # Default build command will explicitly target wasm
-CMD /usr/local/Qt-wasm/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
+CMD /usr/local/Qt-wasm/bin/qt-cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-Release} -G Ninja /project/source && ninja
