@@ -8,3 +8,6 @@ list(APPEND CMAKE_FIND_ROOT_PATH "/")
 
 # Increase stack size (was reduced to 64k in Emscripten 3.1.27)
 add_link_options("SHELL:-sSTACK_SIZE=1MB")
+
+# If we are compiling in Debug or RelWithDebInfo, provide source map for webbrowser debugging
+add_link_options("$<$<CONFIG:DEBUG>:-gsource-map>" "$<$<CONFIG:RELWITHDEBINFO>:-gsource-map>")
