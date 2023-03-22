@@ -21,10 +21,6 @@ void ThreadFunction () {
     std::cout << "Hello thread\n";
 }
 
-#ifdef Q_OS_WASM
-QGuiApplication*    g_app = nullptr;
-#endif
-
 void startEngine(QObject* parent)
 {
     QQmlApplicationEngine* engine = new QQmlApplicationEngine(parent);
@@ -68,7 +64,7 @@ int main(int argc, char *argv[])
      * this platform.
      * https://doc-snapshots.qt.io/qt6-dev/wasm.html#application-startup-and-the-event-loop
      */
-    g_app = new QGuiApplication(argc, argv);
+    auto* g_app = new QGuiApplication(argc, argv);
     startEngine(g_app);
     return 0;
 #else
