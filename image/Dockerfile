@@ -19,10 +19,10 @@ RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1
 
 # Clone Qt sources
 WORKDIR /development
-RUN git clone --branch=6.5 https://code.qt.io/qt/qt5.git
+RUN curl https://download.qt.io/development_releases/qt/6.5/6.5.0-rc/single/qt-everywhere-src-6.5.0-rc.tar.xz --output src.tar.xz
+RUN XZ_OPT='-T0' tar -xf src.tar.xz
+RUN ln -s qt-everywhere-src-* qt5
 WORKDIR /development/qt5
-RUN git rev-parse HEAD
-RUN ./init-repository
 
 # Build Qt for x64
 RUN mkdir -p /development/qt5_build_x64
