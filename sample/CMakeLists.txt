@@ -12,8 +12,6 @@ set(CMAKE_AUTOMOC ON)
 # Find the Qt libraries for Qt Quick/QML
 find_package(Qt6 REQUIRED Qml Quick Gui)
 
-find_package(Eigen3 NO_MODULE REQUIRED)
-
 # add the qml.qrc file
 qt_add_resources(qml_QRC qml.qrc)
 
@@ -31,7 +29,7 @@ target_link_libraries(helloworld PRIVATE Qt::Qml Qt::Quick)
 qt_import_qml_plugins(helloworld)
 
 # Find Eigen lib (for compatibility testing)
-find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(Eigen3 REQUIRED NO_MODULE)
 target_link_libraries(helloworld PRIVATE Eigen3::Eigen)
 
 configure_file(example.txt example.txt COPYONLY)
