@@ -32,5 +32,9 @@ qt_import_qml_plugins(helloworld)
 find_package(Eigen3 REQUIRED NO_MODULE)
 target_link_libraries(helloworld PRIVATE Eigen3::Eigen)
 
+# Find Boost (for compatibility testing)'
+find_package(Boost REQUIRED)
+target_link_libraries(helloworld PRIVATE Boost::boost)
+
 configure_file(example.txt example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file example.txt")
