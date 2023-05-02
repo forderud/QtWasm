@@ -5,6 +5,7 @@
 #include <fstream>
 #include <thread>
 #include <iostream>
+#include <Eigen/Dense>
 
 
 static void PrintFileContent (const char * filename) {
@@ -30,6 +31,7 @@ void startEngine(QObject* parent)
 int main(int argc, char *argv[])
 {
     std::cout << "Qt version " << QT_VERSION_STR << std::endl;
+	std::cout << "Eigen version " << EIGEN_WORLD_VERSION << "." << EIGEN_MAJOR_VERSION  << "." << EIGEN_MINOR_VERSION << std::endl;
 	
 #ifdef NDEBUG
     std::cout << "Release build." << std::endl;
