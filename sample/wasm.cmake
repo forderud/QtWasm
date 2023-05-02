@@ -5,6 +5,7 @@
 
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
 list(APPEND CMAKE_FIND_ROOT_PATH "/")
+list(APPEND CMAKE_FIND_ROOT_PATH "/project/dependencies") # required for Boost
 
 # Increase stack size (was reduced to 64k in Emscripten 3.1.27)
 add_link_options("SHELL:-sSTACK_SIZE=1MB")
