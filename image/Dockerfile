@@ -59,14 +59,14 @@ RUN apt-get update && apt-get -y install \
     libboost-dev
 
 # Make symlinks to avoid adding /usr/include to include dirs.
-RUN mkdir -p /project/dependencies/include && mkdir -p /project/dependencies/lib && \
-    ln -s /usr/include/boost   /project/dependencies/include/boost  && \
-    ln -s /usr/include/eigen3  /project/dependencies/include/eigen3 && \
-    ln -s /usr/lib/cmake       /project/dependencies/lib/cmake      && \
-    ln -s /usr/local/Qt-wasm   /project/Qt
+RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && \
+    ln -s /usr/include/boost   /opt/wasm-deps/include/boost  && \
+    ln -s /usr/include/eigen3  /opt/wasm-deps/include/eigen3 && \
+    ln -s /usr/lib/cmake       /opt/wasm-deps/lib/cmake      && \
+    ln -s /usr/local/Qt-wasm   /opt/Qt
 
 # Add qmake to PATH (doesn't seem to work)
-#ENV PATH="/project/Qt/bin:${PATH}"
+#ENV PATH="/opt/Qt/bin:${PATH}"
 
 # Build custom sources
 WORKDIR /project/build
