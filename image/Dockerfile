@@ -48,7 +48,7 @@ RUN update-ca-certificates
 
 # Copy Qt binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-x64/  /usr/local/Qt-x64/
-COPY --from=qtbuilder /usr/local/Qt-wasm/ /usr/local/Qt-wasm/
+COPY --from=qtbuilder /usr/local/Qt-wasm/ /opt/Qt/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -62,8 +62,7 @@ RUN apt-get update && apt-get -y install \
 RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && \
     ln -s /usr/include/boost   /opt/wasm-deps/include/boost  && \
     ln -s /usr/include/eigen3  /opt/wasm-deps/include/eigen3 && \
-    ln -s /usr/lib/cmake       /opt/wasm-deps/lib/cmake      && \
-    ln -s /usr/local/Qt-wasm   /opt/Qt
+    ln -s /usr/lib/cmake       /opt/wasm-deps/lib/cmake
 
 # Add qmake to PATH (doesn't seem to work)
 #ENV PATH="/opt/Qt/bin:${PATH}"
@@ -72,4 +71,4 @@ RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && \
 WORKDIR /project/build
 
 # Default build command will explicitly target wasm
-CMD /usr/local/Qt-wasm/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
+CMD /opt/Qt/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
