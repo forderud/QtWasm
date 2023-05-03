@@ -4,7 +4,7 @@
 # See EMCC_COMMON_LFLAGS in https://github.com/qt/qtbase/blob/dev/mkspecs/common/wasm/wasm.conf
 
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
-list(APPEND CMAKE_FIND_ROOT_PATH "/")
+list(APPEND CMAKE_FIND_ROOT_PATH "/") # required for Eigen
 list(APPEND CMAKE_FIND_ROOT_PATH "/project/dependencies") # required for Boost
 
 # Increase stack size (was reduced to 64k in Emscripten 3.1.27)
