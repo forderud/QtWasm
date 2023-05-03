@@ -34,7 +34,7 @@ RUN cmake --install .
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -feature-wasm-exceptions -feature-thread -nomake examples -prefix /usr/local/Qt-wasm
+RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
 RUN cmake --build . $EXTRA_BUILD_PARAMS
 RUN cmake --install .
 
@@ -48,7 +48,7 @@ RUN update-ca-certificates
 
 # Copy Qt binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-x64/  /usr/local/Qt-x64/
-COPY --from=qtbuilder /usr/local/Qt-wasm/ /opt/Qt/
+COPY --from=qtbuilder /opt/Qt/ /opt/Qt/
 
 # Install Boost & Eigen
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
