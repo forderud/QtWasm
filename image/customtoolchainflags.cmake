@@ -1,0 +1,7 @@
+include($ENV{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+add_compile_options(-fwasm-exceptions)
+add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-pthread>)
+set(SHELL_USE_PTHREADS "SHELL:-s USE_PTHREADS=1")
+add_compile_options($<$<COMPILE_LANGUAGE:C>:${SHELL_USE_PTHREADS}>)
+add_link_options(${SHELL_USE_PTHREADS})
+add_link_options(SHELL:-s EMULATE_FUNCTION_POINTER_CASTS)

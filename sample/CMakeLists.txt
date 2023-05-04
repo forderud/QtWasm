@@ -37,5 +37,9 @@ target_link_libraries(helloworld PRIVATE Eigen3::Eigen)
 find_package(Boost REQUIRED)
 target_link_libraries(helloworld PRIVATE Boost::boost)
 
+# Find HDF5 (for compatibility testing)
+find_package(HDF5 REQUIRED)
+target_link_libraries(helloworld PRIVATE hdf5::hdf5)
+
 configure_file(example.txt example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file example.txt")
