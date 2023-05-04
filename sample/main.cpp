@@ -5,8 +5,10 @@
 #include <fstream>
 #include <thread>
 #include <iostream>
+
 #include <Eigen/Dense>
 #include <boost/version.hpp>
+#include <hdf5.h>
 
 
 static void PrintFileContent (const char * filename) {
@@ -34,7 +36,8 @@ int main(int argc, char *argv[])
     std::cout << "Qt version " << QT_VERSION_STR << std::endl;
 	std::cout << "Eigen version " << EIGEN_WORLD_VERSION << "." << EIGEN_MAJOR_VERSION  << "." << EIGEN_MINOR_VERSION << std::endl;
 	std::cout << "Boost version " << BOOST_VERSION << std::endl;
-	
+	std::cout << "HDF5 version " << H5_VERSION << std::endl;
+		
 #ifdef NDEBUG
     std::cout << "Release build." << std::endl;
 #else
