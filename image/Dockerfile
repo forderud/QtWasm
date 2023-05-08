@@ -59,7 +59,7 @@ RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps 
 WORKDIR /build/hdf5-1.8.23/build-wasm
 # Redirect the output of the binary to a file (it should use the 1st argument... But it doesn't)
 RUN sed -i 's/js H5/js > H5/g' src/CMakeFiles/gen_hdf5-static.dir/build.make
-RUN emmake make -j`nproc` install
+RUN emmake make install
 
 
 # Eigen 3.4.0 does not support sse optimizations, but the tip of 3.4 does
