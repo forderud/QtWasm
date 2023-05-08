@@ -65,7 +65,7 @@ RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps 
     -DHDF5_BUILD_EXAMPLES:BOOL=OFF \
     -DCMAKE_TOOLCHAIN_FILE=/customtoolchainflags.cmake
 WORKDIR /build/hdf5/build-wasm
-RUN emmake make -j`nproc` install
+RUN emmake make install
 
 
 # Eigen 3.4.0 does not support sse optimizations, but the tip of 3.4 does
