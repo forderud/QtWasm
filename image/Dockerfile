@@ -19,7 +19,7 @@ RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1
 
 # Clone Qt sources
 WORKDIR /development
-RUN git clone --branch v6.5.0 https://code.qt.io/qt/qt5.git
+RUN git clone --branch v6.5.1 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN git rev-parse HEAD
 RUN ./init-repository
