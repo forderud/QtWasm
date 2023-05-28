@@ -15,5 +15,6 @@ docker build --file Dockerfile --build-arg EXTRA_BUILD_PARAMS="--parallel 4" --t
 
 IF %ERRORLEVEL% EQU 0 (
   :: Push to dockerhub
+  docker push forderud/qtwasm:latest
   docker push forderud/qtwasm:%VERSION%
 )
