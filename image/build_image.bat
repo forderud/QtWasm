@@ -11,10 +11,12 @@ IF %ERRORLEVEL% EQU 0 (
 )
 
 :: Build container
-docker build --file Dockerfile --build-arg EXTRA_BUILD_PARAMS="--parallel 4" --tag=forderud/qtwasm:%VERSION% .
+docker build --file Dockerfile --build-arg EXTRA_BUILD_PARAMS="--parallel 4" --tag=forderud/qtwasm:latest .
 
 IF %ERRORLEVEL% EQU 0 (
   :: Push to dockerhub
   docker push forderud/qtwasm:latest
+  
+  docker tag forderud/qtwasm:latest forderud/qtwasm:%VERSION%
   docker push forderud/qtwasm:%VERSION%
 )
