@@ -34,7 +34,7 @@ RUN cmake --install .
 # Build Qt for WASM
 RUN mkdir -p /development/qt5_build
 WORKDIR /development/qt5_build
-RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
+RUN /development/qt5/configure -qt-host-path /usr/local/Qt-x64 -xplatform wasm-emscripten -feature-wasm-simd128 -feature-wasm-exceptions -feature-thread -nomake examples -prefix /opt/Qt
 RUN cmake --build . $EXTRA_BUILD_PARAMS
 RUN cmake --install .
 
