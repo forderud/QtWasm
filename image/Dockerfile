@@ -24,6 +24,10 @@ WORKDIR /development/qt5
 RUN git rev-parse HEAD
 RUN ./init-repository
 
+# Apply patches
+WORKDIR /development/qt5
+RUN git -C qtbase cherry-pick -n 0e23865 # Already merged in 6.6, but not 6.5.3. wasm: Improve screen cleanup (https://codereview.qt-project.org/c/qt/qtbase/+/503428)
+
 # Build Qt for x64
 RUN mkdir -p /development/qt5_build_x64
 WORKDIR /development/qt5_build_x64
