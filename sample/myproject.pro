@@ -11,6 +11,7 @@ INCLUDEPATH  += /opt/wasm-deps/include/eigen3
 
 # enable C++ exception catching
 QMAKE_CXXFLAGS += -fwasm-exceptions
+QMAKE_LFLAGS += -fwasm-exceptions
 
 # embed example.txt into binary
 QMAKE_PRE_LINK += $$QMAKE_COPY ../source/example.txt .
