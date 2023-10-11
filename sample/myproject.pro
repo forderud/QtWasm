@@ -6,6 +6,9 @@ QT += quick qml
 SOURCES   += main.cpp
 RESOURCES += qml.qrc
 
+INCLUDEPATH  += /opt/wasm-deps/include
+INCLUDEPATH  += /opt/wasm-deps/include/eigen3
+
 # enable C++ exception catching
 QMAKE_CXXFLAGS += -fexceptions
 QMAKE_LFLAGS += -s DISABLE_EXCEPTION_CATCHING=0
