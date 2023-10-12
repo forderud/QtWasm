@@ -13,8 +13,10 @@
 
 static void PrintFileContent (const char * filename) {
     std::ifstream myfile (filename);
-    if (!myfile.is_open())
+    if (!myfile.is_open()) {
+        std::cerr << "ERROR: Unable to open file." << std::endl;
         return;
+    }
     
     std::string line;
     while (getline(myfile,line))
