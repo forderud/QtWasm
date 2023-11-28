@@ -89,8 +89,8 @@ RUN apt-get update && apt-get -y install \
 RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && mkdir -p /opt/wasm-deps/share && \
     ln -s /usr/include/boost   /opt/wasm-deps/include/boost  && \
     ln -s /usr/include/eigen3  /opt/wasm-deps/include/eigen3 && \
-    ln -s /usr/lib/cmake       /opt/wasm-deps/lib/cmake && \
-    ln -s /usr/share/eigen3    /opt/wasm-deps/share/eigen3
+    ln -s /usr/share/eigen3    /opt/wasm-deps/share/eigen3 && \
+    ln -s /usr/lib/cmake       /opt/wasm-deps/lib/cmake
 
 # Add qmake to PATH (doesn't seem to work)
 #ENV PATH="/opt/Qt/bin:${PATH}"
