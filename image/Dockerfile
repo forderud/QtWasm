@@ -1,5 +1,7 @@
 # Based on https://github.com/emscripten-core/emsdk/tree/master/docker
-FROM emscripten/emsdk:3.1.27 AS qtbuilder
+FROM emscripten/emsdk:3.1.27 AS emscripten_base
+
+FROM emscripten_base AS qtbuilder
 
 # Extra Qt build parameters
 ARG EXTRA_BUILD_PARAMS=
@@ -63,7 +65,7 @@ WORKDIR /build/hdf5-1.8.23/build-wasm
 RUN sed -i 's/js H5/js > H5/g' src/CMakeFiles/gen_hdf5-static.dir/build.make
 RUN emmake make -j`nproc` install
 
-FROM emscripten/emsdk:3.1.27
+FROM emscripten_base
 
 # Install GE root certificate
 # must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
