@@ -42,4 +42,4 @@ find_package(HDF5 REQUIRED)
 target_link_libraries(helloworld PRIVATE hdf5::hdf5)
 
 configure_file(example.txt example.txt COPYONLY)
-target_link_libraries(helloworld PRIVATE "--preload-file example.txt")
+target_link_libraries(helloworld PRIVATE "--embed-file example.txt")
