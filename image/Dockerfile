@@ -65,6 +65,17 @@ WORKDIR /build/hdf5-1.8.23/build-wasm
 RUN sed -i 's/js H5/js > H5/g' src/CMakeFiles/gen_hdf5-static.dir/build.make
 RUN emmake make -j`nproc` install
 
+# Eigen 3.4.0 does not support sse optimizations, but the tip of 3.4 does
+# use a self-built version of the eigen package from 3.4 branch
+# rollback to deb packages when 3.4.1 is released and available
+FROM emscripten_base AS eigen
+
+RUN git clone --branch 3.4 https://gitlab.com/libeigen/eigen.git && \
+    cd eigen && \
+    emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps/ -DCMAKE_BUILD_TYPE:STRING=Release && \
+    cd build-wasm && \
+    emmake make -j`nproc` install
+
 FROM emscripten_base
 
 # Install GE root certificate
@@ -77,19 +88,20 @@ COPY --from=qtbuilder /usr/local/Qt-x64/ /usr/local/Qt-x64/
 COPY --from=qtbuilder /opt/Qt/           /opt/Qt/
 COPY --from=qtbuilder /opt/wasm-deps/    /opt/wasm-deps/
 
-# Install Boost & Eigen
+# Use self-installed eigen
+COPY --from=eigen /opt/wasm-deps/include/eigen3/    /opt/wasm-deps/include/eigen3/
+COPY --from=eigen /opt/wasm-deps/share/eigen3/    /opt/wasm-deps/share/eigen3/
+COPY --from=eigen /opt/wasm-deps/share/pkgconfig/eigen3.pc /opt/wasm-deps/share/pkgconfig/eigen3.pc
+
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 RUN apt-get update && apt-get -y install \
     ninja-build      \
     libtool-bin      \
-    libeigen3-dev    \
     libboost-dev
 
 # Make symlinks to avoid adding /usr/include to include dirs.
 RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && mkdir -p /opt/wasm-deps/share && \
     ln -s /usr/include/boost   /opt/wasm-deps/include/boost  && \
-    ln -s /usr/include/eigen3  /opt/wasm-deps/include/eigen3 && \
-    ln -s /usr/share/eigen3    /opt/wasm-deps/share/eigen3 && \
     ln -s /usr/lib/cmake       /opt/wasm-deps/lib/cmake
 
 # Add qmake to PATH (doesn't seem to work)
