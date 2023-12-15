@@ -21,14 +21,15 @@ RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1
 
 # Clone Qt sources
 WORKDIR /development
-RUN git clone --branch v6.6.1 https://code.qt.io/qt/qt5.git
+RUN git clone --branch 6.6 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN git rev-parse HEAD
 RUN ./init-repository
 
 # Apply patches
 WORKDIR /development/qt5
-RUN git -C qtbase cherry-pick -n 0e23865 # Already merged in 6.6, but not 6.5.3. wasm: Improve screen cleanup (https://codereview.qt-project.org/c/qt/qtbase/+/503428)
+RUN git -C qtbase cherry-pick -n 783f7edf4c493ebb84f031797eb0e21f38238f05 # Already merged in 6.6. wasm: fix qtloader.js preRun usage (https://codereview.qt-project.org/c/qt/qtbase/+/525573)
+
 
 # Build Qt for x64
 RUN mkdir -p /development/qt5_build_x64
