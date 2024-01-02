@@ -26,11 +26,6 @@ WORKDIR /development/qt5
 RUN git rev-parse HEAD
 RUN ./init-repository
 
-# Apply patches
-WORKDIR /development/qt5
-RUN git -C qtbase cherry-pick -n 783f7edf4c493ebb84f031797eb0e21f38238f05 # Already merged in 6.6. wasm: fix qtloader.js preRun usage (https://codereview.qt-project.org/c/qt/qtbase/+/525573)
-
-
 # Build Qt for x64
 RUN mkdir -p /development/qt5_build_x64
 WORKDIR /development/qt5_build_x64
