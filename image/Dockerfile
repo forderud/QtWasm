@@ -60,16 +60,22 @@ WORKDIR /build/hdf5-1.8.23/build-wasm
 RUN sed -i 's/js H5/js > H5/g' src/CMakeFiles/gen_hdf5-static.dir/build.make
 RUN emmake make -j`nproc` install
 
+
 # Eigen 3.4.0 does not support sse optimizations, but the tip of 3.4 does
 # use a self-built version of the eigen package from 3.4 branch
 # rollback to deb packages when 3.4.1 is released and available
 FROM emscripten_base AS eigen
+
+# Copy GE and GEHC root certificates and install them into the container
+COPY GE_External_Root_CA_2_1.crt gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
+RUN update-ca-certificates
 
 RUN git clone --branch 3.4 https://gitlab.com/libeigen/eigen.git && \
     cd eigen && \
     emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps/ -DCMAKE_BUILD_TYPE:STRING=Release && \
     cd build-wasm && \
     emmake make -j`nproc` install
+
 
 FROM emscripten_base
 
