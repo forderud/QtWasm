@@ -11,9 +11,8 @@ ENV LANG=C.UTF-8
 
 RUN mkdir -p /development
 
-# Install GE root certificate
-# must be downloaded from https://static.gecirtnotification.com/browser_remediation/sop_server_v1.html and copied into container first
-COPY GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
+# Copy GE and GEHC root certificates and install them into the container
+COPY GE_External_Root_CA_2_1.crt gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Install Mesa OpenGL and ninja (needed to build Qt for x64)
