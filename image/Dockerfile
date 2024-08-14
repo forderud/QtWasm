@@ -1,5 +1,5 @@
 # Based on https://github.com/emscripten-core/emsdk/tree/master/docker
-FROM emscripten/emsdk:3.1.37 AS emscripten_base
+FROM emscripten/emsdk:3.1.50 AS emscripten_base
 
 FROM emscripten_base AS qtbuilder
 
