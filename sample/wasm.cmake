@@ -6,9 +6,6 @@
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
 list(APPEND CMAKE_FIND_ROOT_PATH "/opt/wasm-deps") # required for Boost & Eigen
 
-# Increase stack size (was reduced to 64k in Emscripten 3.1.27)
-add_link_options("SHELL:-sSTACK_SIZE=1MB")
-
 # Adding sse2 support:
 # https://emscripten.org/docs/porting/simd.html#compiling-simd-code-targeting-x86-sse-instruction-sets
 # we do not need to add flag -msimd128 as it will be appended
