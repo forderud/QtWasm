@@ -9,6 +9,10 @@ Instructions:
 ## How to build the image
 Look at the scripts in the `image` subfolder.
 
+Docker cleanup:
+* Clean local images: `docker image prune`
+* Clean build cache: `docker builder prune`
+
 ## How to use the image
 From a Windows host:
 * Run either `build_cmake.bat` or `build_qmake.bat` to build the sample project using either QMake or CMake. A web browser will automatically open and load the app after the build process have completed.
