@@ -13,7 +13,7 @@ ENV LANG=C.UTF-8
 RUN mkdir -p /development
 
 # Copy GE and GEHC root certificates and install them into the container
-COPY GE_External_Root_CA_2_1.crt gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
+COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Install Mesa OpenGL and ninja (needed to build Qt for x64)
@@ -68,7 +68,7 @@ RUN emmake make -j`nproc` install
 FROM emscripten_base AS eigen
 
 # Copy GE and GEHC root certificates and install them into the container
-COPY GE_External_Root_CA_2_1.crt gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
+COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 RUN git clone --branch 3.4 https://gitlab.com/libeigen/eigen.git && \
@@ -81,7 +81,7 @@ RUN git clone --branch 3.4 https://gitlab.com/libeigen/eigen.git && \
 FROM emscripten_base
 
 # Copy GE and GEHC root certificates and install them into the container
-COPY GE_External_Root_CA_2_1.crt gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
+COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
 
 # Copy binaries to new container
