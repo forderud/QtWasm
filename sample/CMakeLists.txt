@@ -11,7 +11,7 @@ endif()
 set(CMAKE_AUTOMOC ON)
 
 # Find the Qt libraries for Qt Quick/QML
-find_package(Qt6 REQUIRED Qml Quick Gui)
+find_package(Qt6 REQUIRED Qml Quick)
 
 # add the qml.qrc file
 qt_add_resources(qml_QRC qml.qrc)
