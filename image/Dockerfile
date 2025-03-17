@@ -13,8 +13,12 @@ ENV LANG=C.UTF-8
 RUN mkdir -p /development
 
 # Copy GE and GEHC root certificates and install them into the container
+# Ubuntu steps:
 COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
+# RedHat/Fedora steps:
+#COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /etc/pki/ca-trust/source/anchors
+#RUN update-ca-trust
 
 # Install Mesa OpenGL and ninja (needed to build Qt for x64)
 RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev ninja-build
@@ -68,8 +72,12 @@ RUN emmake make -j`nproc` install
 FROM emscripten_base AS eigen
 
 # Copy GE and GEHC root certificates and install them into the container
+# Ubuntu steps:
 COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
+# RedHat/Fedora steps:
+#COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /etc/pki/ca-trust/source/anchors
+#RUN update-ca-trust
 
 RUN git clone --branch 3.4 https://gitlab.com/libeigen/eigen.git && \
     cd eigen && \
@@ -81,8 +89,12 @@ RUN git clone --branch 3.4 https://gitlab.com/libeigen/eigen.git && \
 FROM emscripten_base
 
 # Copy GE and GEHC root certificates and install them into the container
+# Ubuntu steps:
 COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
+# RedHat/Fedora steps:
+#COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /etc/pki/ca-trust/source/anchors
+#RUN update-ca-trust
 
 # Copy binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-x64/ /usr/local/Qt-x64/
