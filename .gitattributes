@@ -1,2 +1,3 @@
 # Patch files require unix line endings
 *.diff text eol=lf
+*.patch text eol=lf
