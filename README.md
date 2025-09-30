@@ -3,7 +3,6 @@ Dockerfile for building a containerized Qt SW development environment for WebAss
 ## Prerequisites
 Instructions:
 * Download and install Docker desktop from https://www.docker.com/products/docker-desktop/
-* From the settings, configure http and https proxy settings, as well as proxy bypass
 * Start Docker desktop in "Linux container" mode
 
 ## How to build the image
