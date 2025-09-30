@@ -48,19 +48,20 @@ RUN cmake --install .
 COPY customtoolchainflags.cmake /
 WORKDIR /build
 # Download sources from official repo
-RUN wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.23/src/hdf5-1.8.23.tar.gz && \
-    tar -xf hdf5-1.8.23.tar.gz
-WORKDIR /build/hdf5-1.8.23
+RUN wget https://github.com/HDFGroup/hdf5/releases/download/hdf5_1.14.6/hdf5-1.14.6.tar.gz && \
+    tar -xf hdf5-1.14.6.tar.gz
+WORKDIR /build/hdf5-1.14.6
 #inject wasm specific flags in the projects
 RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps \
     -DHDF5_INSTALL_CMAKE_DIR=lib/cmake/ \
     -DCMAKE_BUILD_TYPE:STRING=Release \
     -DBUILD_SHARED_LIBS:BOOL=OFF \
     -DBUILD_TESTING:BOOL=OFF \
+    -DHDF5_ENABLE_Z_LIB_SUPPORT:BOOL=OFF \
     -DHDF5_BUILD_CPP_LIB:BOOL=ON \
     -DHDF5_BUILD_EXAMPLES:BOOL=OFF \
     -DCMAKE_TOOLCHAIN_FILE=/customtoolchainflags.cmake
-WORKDIR /build/hdf5-1.8.23/build-wasm
+WORKDIR /build/hdf5-1.14.6/build-wasm
 # Redirect the output of the binary to a file (it should use the 1st argument... But it doesn't)
 RUN sed -i 's/js H5/js > H5/g' src/CMakeFiles/gen_hdf5-static.dir/build.make
 RUN emmake make -j`nproc` install
