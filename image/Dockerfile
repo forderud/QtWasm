@@ -62,8 +62,6 @@ RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps 
     -DHDF5_BUILD_EXAMPLES:BOOL=OFF \
     -DCMAKE_TOOLCHAIN_FILE=/customtoolchainflags.cmake
 WORKDIR /build/hdf5-1.14.6/build-wasm
-# Redirect the output of the binary to a file (it should use the 1st argument... But it doesn't)
-RUN sed -i 's/js H5/js > H5/g' src/CMakeFiles/gen_hdf5-static.dir/build.make
 RUN emmake make -j`nproc` install
 
 
