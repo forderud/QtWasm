@@ -51,6 +51,11 @@ WORKDIR /build
 RUN wget https://github.com/HDFGroup/hdf5/releases/download/hdf5_1.14.6/hdf5-1.14.6.tar.gz && \
     tar -xf hdf5-1.14.6.tar.gz
 WORKDIR /build/hdf5-1.14.6
+
+# Apply custom patch(es)
+COPY *.patch /build/hdf5-1.14.6/
+RUN git apply "0001-Only-clear-FE_INVALID-when-that-symbol-is-present-on.patch" # https://github.com/HDFGroup/hdf5/pull/4954
+
 #inject wasm specific flags in the projects
 RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps \
     -DHDF5_INSTALL_CMAKE_DIR=lib/cmake/ \
