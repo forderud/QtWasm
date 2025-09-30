@@ -47,13 +47,11 @@ RUN cmake --install .
 # Build HDF5 for WASM
 COPY customtoolchainflags.cmake /
 WORKDIR /build
-# Download sources from official repo
-RUN wget https://github.com/HDFGroup/hdf5/releases/download/hdf5_1.14.6/hdf5-1.14.6.tar.gz && \
-    tar -xf hdf5-1.14.6.tar.gz
-WORKDIR /build/hdf5-1.14.6
+RUN git clone --branch hdf5_1.14.6 https://github.com/HDFGroup/hdf5.git
+WORKDIR /build/hdf5
 
 # Apply custom patch(es)
-COPY *.patch /build/hdf5-1.14.6/
+COPY *.patch /build/hdf5/
 RUN git apply "0001-Only-clear-FE_INVALID-when-that-symbol-is-present-on.patch" # https://github.com/HDFGroup/hdf5/pull/4954
 
 #inject wasm specific flags in the projects
@@ -66,7 +64,7 @@ RUN emcmake cmake -S . -B build-wasm -DCMAKE_INSTALL_PREFIX:PATH=/opt/wasm-deps 
     -DHDF5_BUILD_CPP_LIB:BOOL=ON \
     -DHDF5_BUILD_EXAMPLES:BOOL=OFF \
     -DCMAKE_TOOLCHAIN_FILE=/customtoolchainflags.cmake
-WORKDIR /build/hdf5-1.14.6/build-wasm
+WORKDIR /build/hdf5/build-wasm
 RUN emmake make -j`nproc` install
 
 
