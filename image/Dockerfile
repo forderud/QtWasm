@@ -1,5 +1,5 @@
-# Based on https://github.com/emscripten-core/emsdk/tree/master/docker
-# The Emscripten version must match the Qt version as documented on https://doc.qt.io/qt-6/wasm.html and https://doc-snapshots.qt.io/qt6-dev/wasm.html
+# Based on https://github.com/emscripten-core/emsdk/tree/master/docker (based on Ubuntu)
+# The Emscripten version must match the Qt version as documented on https://doc.qt.io/qt-6/wasm.html
 FROM emscripten/emsdk:3.1.70 AS emscripten_base
 
 FROM emscripten_base AS qtbuilder
