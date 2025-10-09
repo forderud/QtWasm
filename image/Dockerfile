@@ -1,6 +1,6 @@
 # Based on https://github.com/emscripten-core/emsdk/tree/master/docker (based on Ubuntu)
 # The Emscripten version must match the Qt version as documented on https://doc.qt.io/qt-6/wasm.html
-FROM emscripten/emsdk:3.1.70 AS emscripten_base
+FROM emscripten/emsdk:4.0.7 AS emscripten_base
 
 FROM emscripten_base AS qtbuilder
 
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get -y install mesa-common-dev libgl1-mesa-dev libglu1
 
 # Clone Qt sources
 WORKDIR /development
-RUN git clone --branch 6.9 https://code.qt.io/qt/qt5.git
+RUN git clone --branch 6.10 https://code.qt.io/qt/qt5.git
 WORKDIR /development/qt5
 RUN git rev-parse HEAD
 RUN ./init-repository
