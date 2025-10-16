@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     std::cout << "Debug build." << std::endl;
 #endif
     
-    PrintFileContent("example.txt");
+    PrintFileContent("preload_example.txt");
     
     try {
         throw std::runtime_error("Hello runtime_error");
