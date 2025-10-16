@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 #endif
     
     PrintFileContent("preload_example.txt");
+    PrintFileContent("embed_example.txt");
     
     try {
         throw std::runtime_error("Hello runtime_error");

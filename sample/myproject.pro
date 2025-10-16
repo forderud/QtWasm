@@ -13,6 +13,8 @@ INCLUDEPATH  += /opt/wasm-deps/include/eigen3
 QMAKE_CXXFLAGS += -fwasm-exceptions
 QMAKE_LFLAGS += -fwasm-exceptions
 
-# embed preload_example.txt into binary
+# demonstrate different ways of embedding files
 QMAKE_PRE_LINK += $$QMAKE_COPY ../source/preload_example.txt .
 QMAKE_LFLAGS += --preload-file preload_example.txt
+QMAKE_PRE_LINK += $$QMAKE_COPY ../source/embed_example.txt .
+QMAKE_LFLAGS += --embed-file embed_example.txt

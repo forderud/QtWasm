@@ -41,5 +41,8 @@ target_link_libraries(helloworld PRIVATE Boost::boost)
 find_package(HDF5 REQUIRED)
 target_link_libraries(helloworld PRIVATE hdf5::hdf5)
 
+# demonstrate different ways of embedding files
 configure_file(preload_example.txt preload_example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file preload_example.txt")
+configure_file(embed_example.txt embed_example.txt COPYONLY)
+target_link_libraries(helloworld PRIVATE "--embed-file embed_example.txt")
