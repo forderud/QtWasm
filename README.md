@@ -14,7 +14,7 @@ Docker cleanup:
 
 ## How to use the image
 From a Windows host:
-* Run either `build_cmake.bat` or `build_qmake.bat` to build the sample project using either QMake or CMake. A web browser will automatically open and load the app after the build process have completed.
+* Run `build_cmake.bat` to build the sample project using CMake. A web browser will automatically open and load the app after the build process have completed.
 
 ## References
 * https://blog.qt.io/blog/2019/03/05/using-docker-test-qt-webassembly/
