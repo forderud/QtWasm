@@ -10,7 +10,7 @@ set(SOURCES
     main.cpp
 )
 
-# create helloworld executable
+# create application
 qt_add_executable(helloworld ${SOURCES} ${qml_QRC})
 
 # link to dependent library
@@ -24,7 +24,7 @@ qt_import_qml_plugins(helloworld)
 find_package(Eigen3 REQUIRED NO_MODULE)
 target_link_libraries(helloworld PRIVATE Eigen3::Eigen)
 
-# Find Boost (for compatibility testing)'
+# Find Boost (for compatibility testing)
 find_package(Boost REQUIRED)
 target_link_libraries(helloworld PRIVATE Boost::boost)
 

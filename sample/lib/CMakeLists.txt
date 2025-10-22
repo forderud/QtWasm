@@ -1,7 +1,7 @@
 # Enable SIMD support (required when not using Qt)
 add_compile_options(-msimd128)
 
-# add source files
+# source files
 set(SOURCES
     main.cpp
 )
