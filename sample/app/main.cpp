@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
     std::cout << "Debug build." << std::endl;
 #endif
     
+    PrintFileContent("lib/embed_example.txt");
     PrintFileContent("app/preload_example.txt");
-    PrintFileContent("app/embed_example.txt");
     
     try {
         throw std::runtime_error("Hello runtime_error");

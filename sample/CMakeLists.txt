@@ -7,4 +7,5 @@ if(EMSCRIPTEN)
   include(wasm.cmake)
 endif()
 
+add_subdirectory(lib)
 add_subdirectory(app)

@@ -13,6 +13,9 @@ set(SOURCES
 # create helloworld executable
 qt_add_executable(helloworld ${SOURCES} ${qml_QRC})
 
+# link to dependent library
+target_link_libraries(helloworld PRIVATE lib)
+
 # link to Qt modules
 target_link_libraries(helloworld PRIVATE Qt::Qml Qt::Quick)
 qt_import_qml_plugins(helloworld)
@@ -29,8 +32,6 @@ target_link_libraries(helloworld PRIVATE Boost::boost)
 find_package(HDF5 REQUIRED)
 target_link_libraries(helloworld PRIVATE hdf5::hdf5)
 
-# demonstrate different ways of embedding files
+# preload-embed a file into the library
 configure_file(preload_example.txt preload_example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file ${CMAKE_CURRENT_BINARY_DIR}/preload_example.txt")
-configure_file(embed_example.txt embed_example.txt COPYONLY)
-target_link_libraries(helloworld PRIVATE "--embed-file ${CMAKE_CURRENT_BINARY_DIR}/embed_example.txt")
