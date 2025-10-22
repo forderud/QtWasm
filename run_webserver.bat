@@ -4,6 +4,6 @@ cd build
 
 echo Opening web browser and starting web server...
 
-start http://localhost:8080/helloworld.html
+start http://localhost:8080/app/helloworld.html
 
 ..\WebServer.py 8080
