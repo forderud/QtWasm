@@ -1,22 +1,19 @@
-# Instruct CMake to run moc automatically when needed.
+# run moc automatically when needed
 set(CMAKE_AUTOMOC ON)
 
-# Find the Qt libraries for Qt Quick/QML
 find_package(Qt6 REQUIRED Qml Quick)
 
-# add the qml.qrc file
 qt_add_resources(qml_QRC qml.qrc)
 
-# add source files
-set(SOURCE
-    ${SOURCE}
+# source files
+set(SOURCES
     main.cpp
 )
 
-# Tell CMake to create the helloworld executable
-qt_add_executable(helloworld ${SOURCE} ${qml_QRC})
+# create helloworld executable
+qt_add_executable(helloworld ${SOURCES} ${qml_QRC})
 
-# Use the Qml/Quick modules from Qt 5.
+# link to Qt modules
 target_link_libraries(helloworld PRIVATE Qt::Qml Qt::Quick)
 qt_import_qml_plugins(helloworld)
 
