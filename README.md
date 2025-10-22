@@ -17,5 +17,6 @@ From a Windows host:
 * Run `build_cmake.bat` to build the sample project using CMake. A web browser will automatically open and load the app after the build process have completed.
 
 ## References
+* [Qt for WebAssembly](https://doc.qt.io/qt-6/wasm.html)
 * https://blog.qt.io/blog/2019/03/05/using-docker-test-qt-webassembly/
 * CMake toolchain: https://github.com/emscripten-core/emscripten/blob/main/cmake/Modules/Platform/Emscripten.cmake
