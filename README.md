@@ -18,5 +18,4 @@ From a Windows host:
 
 ## References
 * [Qt for WebAssembly](https://doc.qt.io/qt-6/wasm.html)
-* https://blog.qt.io/blog/2019/03/05/using-docker-test-qt-webassembly/
 * CMake toolchain: https://github.com/emscripten-core/emscripten/blob/main/cmake/Modules/Platform/Emscripten.cmake
