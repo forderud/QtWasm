@@ -1,14 +1,13 @@
-find_package(Qt6 REQUIRED COMPONENTS Core)
+# Enable SIMD support (required when not using Qt)
+add_compile_options(-msimd128)
 
 # add source files
 set(SOURCES
     main.cpp
 )
 
-# Tell CMake to create the library
-qt_add_library(lib ${SOURCES})
-
-target_link_libraries(lib PRIVATE Qt::Core)
+# create library
+add_library(lib ${SOURCES})
 
 # embed a file into the library
 configure_file(embed_example.txt embed_example.txt COPYONLY)
