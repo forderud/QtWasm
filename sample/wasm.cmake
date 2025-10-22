@@ -6,8 +6,7 @@
 # Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
 list(APPEND CMAKE_FIND_ROOT_PATH "/opt/wasm-deps") # required for Boost & Eigen
 
-# Adding sse2 support:
+# Enable SSE2 support
 # https://emscripten.org/docs/porting/simd.html#compiling-simd-code-targeting-x86-sse-instruction-sets
-# we do not need to add flag -msimd128 as it will be appended
-# by qt-cmake configuration
+# Do not need to add "-msimd128" since it will be appended by qt-cmake
 add_compile_options(-msse2)
