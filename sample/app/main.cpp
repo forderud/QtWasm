@@ -11,6 +11,8 @@
 #include <boost/version.hpp>
 #include <hdf5.h>
 
+#include "../lib/lib.hpp"
+
 
 static void PrintFileContent (const char * filename) {
     std::ifstream myfile (filename);
@@ -38,16 +40,18 @@ int main(int argc, char *argv[])
 {
     std::cout << "Emscripten version " << __EMSCRIPTEN_major__ << "." << __EMSCRIPTEN_minor__ << "." << __EMSCRIPTEN_tiny__ << std::endl;
     std::cout << "Qt version " << QT_VERSION_STR << std::endl;
-	std::cout << "Eigen version " << EIGEN_WORLD_VERSION << "." << EIGEN_MAJOR_VERSION  << "." << EIGEN_MINOR_VERSION << " (SIMD: " << Eigen::SimdInstructionSetsInUse() << ")" << std::endl;
-	std::cout << "Boost version " << BOOST_VERSION << std::endl;
-	std::cout << "HDF5 version " << H5_VERSION << std::endl;
-		
+    std::cout << "Eigen version " << EIGEN_WORLD_VERSION << "." << EIGEN_MAJOR_VERSION  << "." << EIGEN_MINOR_VERSION << " (SIMD: " << Eigen::SimdInstructionSetsInUse() << ")" << std::endl;
+    std::cout << "Boost version " << BOOST_VERSION << std::endl;
+    std::cout << "HDF5 version " << H5_VERSION << std::endl;
+
 #ifdef NDEBUG
     std::cout << "Release build." << std::endl;
 #else
     std::cout << "Debug build." << std::endl;
 #endif
-    
+
+    CallLib();
+
     PrintFileContent("lib/embed_example.txt");
     PrintFileContent("app/preload_example.txt");
     

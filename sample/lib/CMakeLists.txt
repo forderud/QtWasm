@@ -3,7 +3,8 @@ add_compile_options(-msimd128)
 
 # source files
 set(SOURCES
-    main.cpp
+    lib.hpp
+    lib.cpp
 )
 
 # create library
