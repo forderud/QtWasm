@@ -24,7 +24,7 @@ Window {
             width: 200
             height: 50
             onPaint: {
-                var gl2 = getContext("webgl2");
+                var gl2 = getContext("webgl2"); // only "2d" supported
                 if (gl2) {
                     console.log("WebGL2 detected.");
                 } else {
