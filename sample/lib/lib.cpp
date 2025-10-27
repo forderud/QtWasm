@@ -11,7 +11,7 @@ static void ThreadFunction () {
 
 void CallLib() {
     printf("INCBIN file content: %.*s\n", gIncbinExampleSize, gIncbinExampleData);
-    
+
     try {
         std::thread t(&ThreadFunction);
         t.join();
