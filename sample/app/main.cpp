@@ -17,7 +17,7 @@
 static void PrintFileContent (const char * filename) {
     std::ifstream myfile (filename);
     if (!myfile.is_open()) {
-        std::cerr << "ERROR: Unable to open file." << std::endl;
+        printf("ERROR: Unable to open file.\n");
         return;
     }
     
@@ -28,7 +28,7 @@ static void PrintFileContent (const char * filename) {
 }
 
 void ThreadFunction () {
-    printf("Hello thread\n");
+    printf("App thread running.\n");
 }
 
 void startEngine(QObject* parent)
