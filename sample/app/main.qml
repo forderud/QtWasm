@@ -22,7 +22,7 @@ Window {
             anchors.horizontalCenter: column.horizontalCenter
             text: "Qt WebAssembly is working!\n" +
                   "Platform: " + Qt.platform.os + "\n" +
-                  "OpenGL " + GraphicsInfo.majorVersion + "." + GraphicsInfo.minorVersion
+                  "OpenGL " + GraphicsInfo.majorVersion + "." + GraphicsInfo.minorVersion + "(renderableType="+ GraphicsInfo.renderableType +")"
         }
         Text {
             anchors.horizontalCenter: column.horizontalCenter
