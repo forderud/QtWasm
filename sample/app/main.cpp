@@ -39,8 +39,8 @@ void startEngine(QObject* parent)
 
 int main(int argc, char *argv[])
 {
-    std::cout << "Emscripten version " << __EMSCRIPTEN_major__ << "." << __EMSCRIPTEN_minor__ << "." << __EMSCRIPTEN_tiny__ << std::endl;
-    std::cout << "Qt version " << QT_VERSION_STR << std::endl;
+    printf("Emscripten version %u.%u.%u\n", __EMSCRIPTEN_major__, __EMSCRIPTEN_minor__, __EMSCRIPTEN_tiny__);
+    printf("Qt version %s\n", QT_VERSION_STR);
     std::cout << "Eigen version " << EIGEN_WORLD_VERSION << "." << EIGEN_MAJOR_VERSION  << "." << EIGEN_MINOR_VERSION << " (SIMD: " << Eigen::SimdInstructionSetsInUse() << ")" << std::endl;
     std::cout << "Boost version " << BOOST_VERSION << std::endl;
     std::cout << "HDF5 version " << H5_VERSION << std::endl;
