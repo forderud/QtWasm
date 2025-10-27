@@ -13,6 +13,19 @@ Window {
 
     Rectangle {
         anchors.fill: parent
+
+        Canvas {
+            anchors.centerIn: parent
+            id: mycanvas
+            width: 100
+            height: 200
+            onPaint: {
+                var ctx = getContext("2d");
+                ctx.fillStyle = Qt.rgba(1.0, 0.5, 0.5, 1);
+                ctx.fillRect(0, 0, width, height);
+            }
+        }
+
         Text {
             anchors.centerIn: parent
             text: "Qt WebAssembly is working!\n" +
