@@ -21,12 +21,12 @@ Window {
         Text {
             anchors.horizontalCenter: column.horizontalCenter
             text: "Qt WebAssembly is working!\n" +
-                  "Platform: " + Qt.platform.os + "\n\n" +
-                  "Press F12 to see more details in the Javascript console."
+                  "Platform: " + Qt.platform.os + "\n" +
+                  "OpenGL " + GraphicsInfo.majorVersion + "." + GraphicsInfo.minorVersion
         }
         Text {
             anchors.horizontalCenter: column.horizontalCenter
-            text: "OpenGL " + GraphicsInfo.majorVersion + "." + GraphicsInfo.minorVersion
+            text: "\n\nPress F12 to see more details in the Javascript console."
         }
     }
 }
