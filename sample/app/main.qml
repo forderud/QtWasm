@@ -1,5 +1,5 @@
-import QtQuick 2.3
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Window
 
 // main window
 Window {
@@ -7,7 +7,7 @@ Window {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            console.log('click');
+            console.log("click");
         }
     }
 
