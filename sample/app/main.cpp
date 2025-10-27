@@ -39,11 +39,13 @@ void startEngine(QObject* parent)
 
 int main(int argc, char *argv[])
 {
-    printf("Emscripten version %u.%u.%u\n", __EMSCRIPTEN_major__, __EMSCRIPTEN_minor__, __EMSCRIPTEN_tiny__);
-    printf("Qt version %s\n", QT_VERSION_STR);
-    printf("Eigen version %u.%u.%u (SIMD: %s)\n", EIGEN_WORLD_VERSION, EIGEN_MAJOR_VERSION, EIGEN_MINOR_VERSION, Eigen::SimdInstructionSetsInUse());
-    printf("Boost version %u\n", BOOST_VERSION);
-    printf("HDF5 version %s\n", H5_VERSION);
+    printf("Dependencies:\n");
+    printf("* Emscripten version %u.%u.%u\n", __EMSCRIPTEN_major__, __EMSCRIPTEN_minor__, __EMSCRIPTEN_tiny__);
+    printf("* Qt version %s\n", QT_VERSION_STR);
+    printf("* Eigen version %u.%u.%u (SIMD: %s)\n", EIGEN_WORLD_VERSION, EIGEN_MAJOR_VERSION, EIGEN_MINOR_VERSION, Eigen::SimdInstructionSetsInUse());
+    printf("* Boost version %u\n", BOOST_VERSION);
+    printf("* HDF5 version %s\n", H5_VERSION);
+    printf("\n");
 
 #ifdef NDEBUG
     printf("Release build.\n");
