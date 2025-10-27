@@ -15,7 +15,9 @@ Window {
         anchors.fill: parent
         Text {
             anchors.centerIn: parent
-            text: "Qt WebAssembly is working!\nPlatform: " + Qt.platform.os + "\n\nPress F12 to see more details in the Javascript console."
+            text: "Qt WebAssembly is working!\n" +
+                  "Platform: " + Qt.platform.os + "\n\n" +
+                  "Press F12 to see more details in the Javascript console."
         }
     }
 }
