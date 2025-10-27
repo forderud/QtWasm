@@ -23,11 +23,11 @@ static void PrintFileContent (const char * filename) {
     
     std::string line;
     while (getline(myfile,line))
-        std::cout << line << '\n';
+        printf("%s\n", line.c_str());
 }
 
 void ThreadFunction () {
-    std::cout << "Hello thread\n";
+    printf("Hello thread\n");
 }
 
 void startEngine(QObject* parent)
@@ -45,9 +45,9 @@ int main(int argc, char *argv[])
     std::cout << "HDF5 version " << H5_VERSION << std::endl;
 
 #ifdef NDEBUG
-    std::cout << "Release build." << std::endl;
+    printf("Release build.\n");
 #else
-    std::cout << "Debug build." << std::endl;
+    printf("Debug build.\n");
 #endif
 
     CallLib();
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     try {
         std::thread t(&ThreadFunction);
         t.join();
-        std::cout << "Thread joined\n";
+        printf("[thread joined]\n");
     } catch (std::exception & e) {
         std::cerr << "ERROR: " << e.what() << std::endl;
         return -1;
