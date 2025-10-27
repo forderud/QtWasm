@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 #else
     printf("Debug build.\n");
 #endif
+    printf("\n");
 
     CallLib();
 
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
     PrintFileContent("app/preload_example.txt");
     
     try {
-        throw std::runtime_error("Hello runtime_error");
+        throw std::runtime_error("App runtime_error");
     } catch (std::exception & e) {
         printf("Exception catching works as expected: %s\n", e.what());
     }
