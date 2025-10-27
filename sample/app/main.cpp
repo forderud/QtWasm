@@ -27,7 +27,7 @@ static void PrintFileContent (const char * filename) {
         printf("%s\n", line.c_str());
 }
 
-void ThreadFunction () {
+static void ThreadFunction () {
     printf("App thread running.\n");
 }
 
