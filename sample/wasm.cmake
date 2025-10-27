@@ -14,6 +14,11 @@ add_compile_options(-fwasm-exceptions) # enable WebAssembly exceptions
 # https://emscripten.org/docs/porting/pthreads.html
 add_compile_options(-pthread)
 
+# Enable only WebGL 2
+# https://emscripten.org/docs/porting/multimedia_and_graphics/OpenGL-support.html
+add_link_options("SHELL:-s MAX_WEBGL_VERSION=2")
+add_link_options("SHELL:-s MIN_WEBGL_VERSION=2")
+
 # Enable SSE2 support
 # https://emscripten.org/docs/porting/simd.html#compiling-simd-code-targeting-x86-sse-instruction-sets
 # Do not need to add "-msimd128" since it will be appended by qt-cmake
