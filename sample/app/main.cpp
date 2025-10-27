@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     try {
         throw std::runtime_error("Hello runtime_error");
     } catch (std::exception & e) {
-        std::cout << "Exception catching works as expected: " << e.what() << std::endl;
+        printf("Exception catching works as expected: %s\n", e.what());
     }
 
     try {
