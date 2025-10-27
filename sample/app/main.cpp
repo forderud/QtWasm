@@ -21,6 +21,7 @@ static void PrintFileContent (const char * filename) {
         return;
     }
     
+    printf("%s file content: ", filename);
     std::string line;
     while (getline(myfile,line))
         printf("%s\n", line.c_str());
