@@ -19,7 +19,7 @@ Window {
         }
 
         Canvas {
-            //anchors.centerIn: column
+            anchors.horizontalCenter: column.horizontalCenter
             id: mycanvas
             width: 200
             height: 50
@@ -38,7 +38,7 @@ Window {
         }
 
         Text {
-            //anchors.centerIn: column
+            anchors.horizontalCenter: column.horizontalCenter
             text: "Qt WebAssembly is working!\n" +
                   "Platform: " + Qt.platform.os + "\n\n" +
                   "Press F12 to see more details in the Javascript console."
