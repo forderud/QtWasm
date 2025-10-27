@@ -11,14 +11,18 @@ Window {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
+    Column {
+        id: column
+        anchors {
+            fill: parent
+            centerIn: parent
+        }
 
         Canvas {
-            anchors.centerIn: parent
+            //anchors.centerIn: column
             id: mycanvas
-            width: 100
-            height: 200
+            width: 200
+            height: 50
             onPaint: {
                 var ctx = getContext("2d");
                 ctx.fillStyle = Qt.rgba(1.0, 0.5, 0.5, 1);
@@ -34,7 +38,7 @@ Window {
         }
 
         Text {
-            anchors.centerIn: parent
+            //anchors.centerIn: column
             text: "Qt WebAssembly is working!\n" +
                   "Platform: " + Qt.platform.os + "\n\n" +
                   "Press F12 to see more details in the Javascript console."
