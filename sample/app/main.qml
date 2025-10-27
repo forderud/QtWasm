@@ -24,7 +24,7 @@ Window {
                 ctx.fillStyle = Qt.rgba(1.0, 0.5, 0.5, 1);
                 ctx.fillRect(0, 0, width, height);
 
-                var gl2 = mycanvas.getContext("webgl2");
+                var gl2 = getContext("webgl2");
                 if (gl2) {
                     console.log("WebGL2 detected.");
                 } else {
