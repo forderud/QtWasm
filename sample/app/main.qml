@@ -20,9 +20,10 @@ Window {
 
         Text {
             anchors.horizontalCenter: column.horizontalCenter
+            property var glType: (GraphicsInfo.renderableType == GraphicsInfo.SurfaceFormatOpenGLES) ? "OpenGL ES " : "OpenGL "
             text: "Qt WebAssembly is working!\n" +
                   "Platform: " + Qt.platform.os + "\n" +
-                  "OpenGL " + GraphicsInfo.majorVersion + "." + GraphicsInfo.minorVersion + "(renderableType="+ GraphicsInfo.renderableType +")"
+                  glType + GraphicsInfo.majorVersion + "." + GraphicsInfo.minorVersion
         }
         Text {
             anchors.horizontalCenter: column.horizontalCenter
