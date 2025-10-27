@@ -13,6 +13,12 @@ void CallLib() {
     printf("INCBIN file content: %.*s\n", gIncbinExampleSize, gIncbinExampleData);
 
     try {
+        throw std::runtime_error("Lib runtime_error");
+    } catch (const std::exception & e) {
+        printf("Exception catching works as expected: %s\n", e.what());
+    }
+
+    try {
         std::thread t(&ThreadFunction);
         t.join();
         printf("[thread joined]\n");
