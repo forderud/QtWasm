@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
         t.join();
         printf("[thread joined]\n");
     } catch (std::exception & e) {
-        std::cerr << "ERROR: " << e.what() << std::endl;
+        printf("ERROR: %s\n", e.what());
         return -1;
     }
 
