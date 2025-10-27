@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     
     try {
         throw std::runtime_error("App runtime_error");
-    } catch (std::exception & e) {
+    } catch (const std::exception & e) {
         printf("Exception catching works as expected: %s\n", e.what());
     }
 
