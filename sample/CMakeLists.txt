@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 project(sample)
 
 if(EMSCRIPTEN)
-  include(/opt/wasm-deps/share/cmake/wasm.cmake)
+  include(../image/wasm.cmake)
 endif()
 
 add_subdirectory(lib)
