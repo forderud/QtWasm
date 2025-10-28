@@ -94,6 +94,10 @@ FROM emscripten_base
 # Ubuntu steps:
 COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
+
+# Copy the wasm.cmake build configuration file
+COPY wasm.cmake /opt/wasm-deps/share/cmake/
+
 # RedHat/Fedora steps:
 #COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /etc/pki/ca-trust/source/anchors
 #RUN update-ca-trust
