@@ -1,6 +1,9 @@
 :: Uncomment to ease debugging of failed builds
 ::set DOCKER_BUILDKIT=false
 
+:: Change current dir
+cd /d "%~dp0"
+
 echo Determining tag for current commit...
 git describe --abbrev=0 --tags --exact-match > VERSION.txt
 
@@ -9,6 +12,9 @@ IF %ERRORLEVEL% EQU 0 (
 ) ELSE (
   set VERSION=latest
 )
+
+:: Copy CMake toolchain file
+copy ..\sample\wasm.cmake .
 
 :: Build container
 docker build --file Dockerfile --build-arg EXTRA_BUILD_PARAMS="--parallel 4" --tag=forderud/qtwasm:latest .
