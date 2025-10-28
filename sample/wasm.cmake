@@ -3,6 +3,9 @@
 # Most flags are configured to match Qt qmake
 # See EMCC_COMMON_LFLAGS in https://github.com/qt/qtbase/blob/dev/mkspecs/common/wasm/wasm.conf
 
+# Use Emscripten toolchain as starting point
+include($ENV{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+
 # Also search for packages beneath /opt/wasm-deps in addition to /emsdk_portable/sdk/system
 list(APPEND CMAKE_FIND_ROOT_PATH "/opt/wasm-deps") # required for Boost & Eigen
 
