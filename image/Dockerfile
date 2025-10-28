@@ -129,4 +129,4 @@ RUN mkdir -p /opt/wasm-deps/include && mkdir -p /opt/wasm-deps/lib && mkdir -p /
 WORKDIR /project/build
 
 # Default build command will explicitly target wasm
-CMD /opt/Qt/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
+CMD /opt/Qt/bin/qt-cmake -DCMAKE_TOOLCHAIN_FILE=/opt/wasm-deps/share/cmake/wasm.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja /project/source && ninja
