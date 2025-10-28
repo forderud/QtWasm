@@ -3,7 +3,7 @@
 # Most flags are configured to match Qt qmake
 # See EMCC_COMMON_LFLAGS in https://github.com/qt/qtbase/blob/dev/mkspecs/common/wasm/wasm.conf
 
-# Also search for packages beneath filesystem root (in addition to /emsdk_portable/sdk/system)
+# Also search for packages beneath /opt/wasm-deps in addition to /emsdk_portable/sdk/system
 list(APPEND CMAKE_FIND_ROOT_PATH "/opt/wasm-deps") # required for Boost & Eigen
 
 # Enable C++ exception catching also in non-Qt projects
