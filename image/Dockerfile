@@ -98,6 +98,9 @@ RUN update-ca-certificates
 #COPY gehealthcarerootca1.crt gehealthcarerootca2.crt /etc/pki/ca-trust/source/anchors
 #RUN update-ca-trust
 
+# Add CMake toolchain file
+COPY wasm.cmake /opt/wasm-deps/share/cmake/
+
 # Copy binaries to new container
 COPY --from=qtbuilder /usr/local/Qt-x64/ /usr/local/Qt-x64/
 COPY --from=qtbuilder /opt/Qt/           /opt/Qt/
