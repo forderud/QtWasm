@@ -1,4 +1,8 @@
 # Configure WebAssembly build settings
+
+# Use Emscripten build settings as starting point
+include($ENV{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+
 # For some reason, the build settings need to be provided through the linker.
 # Most flags are configured to match Qt qmake
 # See EMCC_COMMON_LFLAGS in https://github.com/qt/qtbase/blob/dev/mkspecs/common/wasm/wasm.conf
