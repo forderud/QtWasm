@@ -15,6 +15,5 @@ add_compile_options(-fwasm-exceptions) # enable WebAssembly exceptions
 add_compile_options(-pthread)
 
 # Enable SSE2 support
-# https://emscripten.org/docs/porting/simd.html#compiling-simd-code-targeting-x86-sse-instruction-sets
-# Do not need to add "-msimd128" since it will be appended by qt-cmake
-add_compile_options(-msse2)
+# https://emscripten.org/docs/porting/simd.html
+add_compile_options(-msse2 -mrelaxed-simd)
