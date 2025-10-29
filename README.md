@@ -19,4 +19,4 @@ From a Windows host:
 ## References
 * [Qt for WebAssembly](https://doc.qt.io/qt-6/wasm.html)
 * Qt [Building projects on the command line](https://doc.qt.io/qt-6/cmake-build-on-cmdline.html) - documents `qt-cmake`
-* CMake toolchain: https://github.com/emscripten-core/emscripten/blob/main/cmake/Modules/Platform/Emscripten.cmake
+* [Emscripten.cmake](https://github.com/emscripten-core/emscripten/blob/main/cmake/Modules/Platform/Emscripten.cmake) toolchain for CMake
