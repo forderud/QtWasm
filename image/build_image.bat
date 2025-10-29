@@ -13,9 +13,6 @@ IF %ERRORLEVEL% EQU 0 (
   set VERSION=latest
 )
 
-:: Copy CMake toolchain file
-copy ..\sample\wasm.cmake .
-
 :: Build container
 docker build --file Dockerfile --build-arg EXTRA_BUILD_PARAMS="--parallel 4" --tag=forderud/qtwasm:latest .
 
