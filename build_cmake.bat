@@ -17,6 +17,8 @@ set MOUNT_BUILD=-v %cd%\build:/project/build
 if "%BUILD_TYPE%"=="" (
   :: Default build settings
   docker run --rm %MOUNT_SOURCE% %MOUNT_BUILD% %DOCKER_IMAGE% || exit /b 1
+  :: Don't expose sources through webserver
+  set MOUNT_SOURCE=
 ) else (
   :: Custom build settings
   copy image\wasm.cmake sample
@@ -30,6 +32,6 @@ start http://localhost:8080/build/app/helloworld.html
 :: so that file paths match build-time paths.
 docker run --rm -p 8080:8080 ^
     -v %cd%\WebServer.py:/project/WebServer.py ^
-    %MOUNT_BUILD% ^
+    %MOUNT_SOURCE% %MOUNT_BUILD% ^
     -w /project %DOCKER_IMAGE% ^
     python3 WebServer.py 8080
