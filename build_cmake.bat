@@ -23,4 +23,13 @@ if "%BUILD_TYPE%"=="" (
   docker run --rm %MOUNT_SOURCE% %MOUNT_BUILD% %DOCKER_IMAGE% /bin/bash -c "/opt/Qt/bin/qt-cmake -DQT_CHAINLOAD_TOOLCHAIN_FILE=/project/source/wasm.cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -G Ninja /project/source && ninja" || exit /b 1
 )
 
-run_webserver.bat
+echo Opening web browser and starting web server...
+start http://localhost:8080/build/app/helloworld.html
+
+:: Serve the webpage from the same docker container,
+:: so that file paths match build-time paths.
+docker run --rm -p 8080:8080 ^
+    -v %cd%\WebServer.py:/project/WebServer.py ^
+    %MOUNT_BUILD% ^
+    -w /project %DOCKER_IMAGE% ^
+    python3 WebServer.py 8080
