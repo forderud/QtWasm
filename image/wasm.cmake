@@ -20,3 +20,9 @@ add_compile_options(-pthread)
 # Enable SSE2 support
 # https://emscripten.org/docs/porting/simd.html
 add_compile_options(-msse2 -mrelaxed-simd)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    # Generate debug information to enable in-browser debugging
+    # https://emscripten.org/docs/porting/Debugging.html
+    add_link_options("SHELL:-gsource-map")
+endif()
