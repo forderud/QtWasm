@@ -11,15 +11,16 @@ mkdir build
 :: Valid choices are "Debug", "RelWithDebInfo", "Release" (also default)
 set BUILD_TYPE=%1
 set DOCKER_IMAGE=forderud/qtwasm:latest
-set DOCKER_MOUNT=-v %cd%\sample:/project/source -v %cd%\build:/project/build
+set MOUNT_SOURCE=-v %cd%\sample:/project/source
+set MOUNT_BUILD=-v %cd%\build:/project/build
 
 if "%BUILD_TYPE%"=="" (
   :: Default build settings
-  docker run --rm %DOCKER_MOUNT% %DOCKER_IMAGE% || exit /b 1
+  docker run --rm %MOUNT_SOURCE% %MOUNT_BUILD% %DOCKER_IMAGE% || exit /b 1
 ) else (
   :: Custom build settings
   copy image\wasm.cmake sample
-  docker run --rm %DOCKER_MOUNT% %DOCKER_IMAGE% /bin/bash -c "/opt/Qt/bin/qt-cmake -DQT_CHAINLOAD_TOOLCHAIN_FILE=/project/source/wasm.cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -G Ninja /project/source && ninja" || exit /b 1
+  docker run --rm %MOUNT_SOURCE% %MOUNT_BUILD% %DOCKER_IMAGE% /bin/bash -c "/opt/Qt/bin/qt-cmake -DQT_CHAINLOAD_TOOLCHAIN_FILE=/project/source/wasm.cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -G Ninja /project/source && ninja" || exit /b 1
 )
 
 run_webserver.bat
