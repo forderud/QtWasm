@@ -10,6 +10,7 @@ Look at the scripts in the `image` subfolder.
 
 ## Docker cleanup commands
 * Clean up containers: `docker container prune --force`
+* Clean up volumes: `docker volume prune --force`
 * Clean local images: `docker image prune --force`
 * Clean build cache: `docker builder prune --force`
 * Clean up networks with routing tables: `docker network prune --force`
