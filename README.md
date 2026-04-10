@@ -9,11 +9,11 @@ Instructions:
 Look at the scripts in the `image` subfolder.
 
 ## Docker cleanup commands
-* Clean up containers: `docker container prune --force`
-* Clean up volumes: `docker volume prune --force`
-* Clean local images: `docker image prune --force`
-* Clean build cache: `docker builder prune --force`
-* Clean up networks with routing tables: `docker network prune --force`
+* Clean up containers: [`docker container prune --force`](https://docs.docker.com/reference/cli/docker/container/prune/)
+* Clean up volumes: [`docker volume prune --force`](https://docs.docker.com/reference/cli/docker/volume/prune/)
+* Clean local images: [`docker image prune --force`](https://docs.docker.com/reference/cli/docker/image/prune/)
+* Clean build cache: [`docker builder prune --force`](https://docs.docker.com/reference/cli/docker/builder/prune/)
+* Clean up networks with routing tables: [`docker network prune --force`](https://docs.docker.com/reference/cli/docker/network/prune/)
 
 ## How to use the image
 From a Windows host:
