@@ -8,9 +8,10 @@ Instructions:
 ## How to build the image
 Look at the scripts in the `image` subfolder.
 
-Docker cleanup:
+## Docker cleanup commands
 * Clean local images: `docker image prune`
 * Clean build cache: `docker builder prune`
+* Clean up networks with routing tables: `docker network prune`
 
 ## How to use the image
 From a Windows host:
