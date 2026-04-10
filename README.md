@@ -15,6 +15,8 @@ Look at the scripts in the `image` subfolder.
 * Clean build cache: [`docker builder prune --force`](https://docs.docker.com/reference/cli/docker/builder/prune/)
 * Clean up networks with routing tables: [`docker network prune --force`](https://docs.docker.com/reference/cli/docker/network/prune/)
 
+Clean up everything: [`docker system prune`](https://docs.docker.com/reference/cli/docker/system/prune/)
+
 ## How to use the image
 From a Windows host:
 * Run `build_cmake.bat` to build the sample project using CMake. A web browser will automatically open and load the app after the build process have completed.
