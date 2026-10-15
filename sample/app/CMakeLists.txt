@@ -35,3 +35,6 @@ target_link_libraries(helloworld PRIVATE hdf5::hdf5)
 # preload-embed a file into the library
 configure_file(preload_example.txt preload_example.txt COPYONLY)
 target_link_libraries(helloworld PRIVATE "--preload-file ${CMAKE_CURRENT_BINARY_DIR}/preload_example.txt")
+
+# copy custom HTML launch file
+add_custom_shell(helloworld)
